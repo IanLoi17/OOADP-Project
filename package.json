@@ -1,0 +1,17 @@
+{
+  "name": "ooadp-project-master",
+  "version": "1.0.0",
+  "description": "Smart medical records retrieve",
+  "main": "app.js",
+  "dependencies": {
+    "connect-flash": "^0.1.1",
+    "express-handlebars": "^3.1.0",
+    "flash-messenger": "^1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Ian Loi",
+  "license": "ISC"
+}
