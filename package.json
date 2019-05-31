@@ -4,9 +4,15 @@
   "description": "Smart medical records retrieve",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "express-handlebars": "^3.1.0",
-    "flash-messenger": "^1.1.1"
+    "express-mysql-session": "^2.1.0",
+    "flash-messenger": "^1.1.1",
+    "mysql2": "^1.6.5",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "sequelize": "^5.8.6"
   },
   "devDependencies": {},
   "scripts": {
