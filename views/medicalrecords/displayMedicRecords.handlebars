@@ -10,22 +10,26 @@
                 </div>
                 <div class="col-sm-10">
                     <fieldset>
-                        <legend style="max-width:206px;">Personal Particulars</legend>
+                        <legend style="max-width:235px;"><i class="fas fa-user"></i> Personal Particulars</legend>
                         <div class="row">
-                            <div class="col-sm-3">Name:</div>
-                            <div class="col-sm-3">Height:</div>
-                            <div class="col-sm-6">Drug Allergy:</div>
+                            <div class="col-sm-3">Name: <span id="name">{{name}}</span></div>
+                            <div class="col-sm-3">Height: <span id="height">{{height}}</span></div>
+                            <div class="col-sm-6">Drug Allergy: <span id="drugallergy">{{drugallergy}}</span></div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-sm-3">Age:</div>
-                            <div class="col-sm-3">Weight:</div>
+                            <div class="col-sm-3">Age: <span>{{age}}</span></div>
+                            <div class="col-sm-3">Weight: <span>{{weight}}</span></div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-sm-3">Gender:</div>
-                            <div class="col-sm-3">Blood Type:</div>
-                            <div class="col-sm-6">Major illness(Dengue, H1N1, etc.):</div>
+                            <div class="col-sm-3">Gender: <span>{{gender}}</span></div>
+                            <div class="col-sm-3">Blood Type: <span>{{bloodtype}}</span></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6">Date of birth: <span>{{dateofbirth}}</span></div>
+                            <div class="col-sm-6">Major illness(Dengue, H1N1, etc.): <span>{{majorillness}}</span></div>                            
                         </div>
                     </fieldset>
                 </div>
@@ -35,14 +39,26 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3>Your Medical Record(s):</h3>
-                    <textarea class="col-sm-6 col-md-12 col-lg-11" rows="7" cols="60" disabled></textarea>
+                    <textarea class="col-sm-6 col-md-12 col-lg-11" rows="7" cols="60" disabled>None</textarea>
+                    {{!-- <p style="font-family:Source Sans Pro;">Updated on:</p> --}}
                 </div>
 
                 <div class="col-sm-6">
                     <h3>Important information(s):</h3>
-                    <textarea class="col-sm-6 col-md-12 col-lg-12" rows="7" cols="70" disabled></textarea>
+                    <textarea class="col-sm-6 col-md-12 col-lg-12" rows="7" cols="70" disabled>None</textarea>
+                    {{!-- <p style="font-family:Source Sans Pro;">Updated on:</p> --}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <button class="btn btn-outline-primary" onclick="home()">Home <i class="fa fa-home"></i></button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function home() {
+        window.location.replace('/');
+    }
+</script>

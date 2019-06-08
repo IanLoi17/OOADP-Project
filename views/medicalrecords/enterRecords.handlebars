@@ -1,0 +1,84 @@
+<style>
+    fieldset {
+        display: block;
+        margin-left: 2px;
+        margin-right: 2px;
+        padding-top: 0.35em;
+        padding-bottom: 0.625em;
+        padding-left: 0.75em;
+        padding-right: 0.75em;
+        border: 2px groove;
+        border-radius: 10px;
+    }
+</style>
+<div class="container">
+    <div>
+        <h1 class="text-center">Entering Medical Records</h1>
+
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <fieldset>
+                        <legend style="max-width:235px;"><i class="fas fa-user"></i> Patient's Particulars</legend>
+                        <div class="row">
+                            <div class="col-sm-3">Name: <span id="name"></span></div>
+                            <div class="col-sm-3">Height: <span id="height"></span></div>
+                            <div class="col-sm-6">Drug Allergy: <span id="drugallergy"></span></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-3">Age: <span id="age"></span></div>
+                            <div class="col-sm-3">Weight: <span id="weight"></span></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-3">Gender: <span id="gender"></span></div>
+                            <div class="col-sm-3">Blood Type:<span id="bloodtype"></span></div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-6">Date of birth: <span id="dateofbirth"></div>
+                            <div class="col-sm-6">Major illness(Dengue, H1N1, etc.): <span id="majorillness"></span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="card card-body">
+            <div class="row">
+                <form action="">
+                    <fieldset>
+                        <legend style="max-width:276px;">Patient's Medical Records</legend>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3><i class="fas fa-book-medical"></i> Medical Records:</h3>
+                                <textarea class="col-sm-12 col-md-12 col-lg-12" rows="8" cols="160"
+                                    placeholder="Eg. "></textarea>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <h3><i class="fa fa-info-circle"></i> Other informations:</h3>
+                                <textarea class="col-sm-12 col-md-12 col-lg-12" rows="7" cols="160"
+                                    placeholder="Eg."></textarea>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <br>
+            <div class="row">
+                <button class="btn btn-outline-primary" type="submit">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

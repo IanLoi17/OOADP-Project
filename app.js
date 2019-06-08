@@ -16,6 +16,13 @@ const FlashMessenger = require('flash-messenger');
 // Load routes
 const mainRoute = require('./routes/main');
 
+
+// Bring in database connection
+const selfcarerecords = require('./config/DBConnection');
+
+// Connects to MySQL database
+selfcarerecords.setUpDB(false);
+
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
 * in Node JS.
