@@ -7,6 +7,22 @@ router.get('/', (req, res) => {
     res.render('index', {title: title});
 });
 
+// Logout user
+router.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
+// Login page
+router.get('/login', (req, res) => {
+    res.render('user/login');
+});
+
+// Register page
+router.get('/register', (req, res) => {
+    res.render('user/register');
+});
+
 // Display medical records for the current patient
 router.get('/showMedicalRecords', (req, res) => {
     let name = 'John Tan';
@@ -19,7 +35,7 @@ router.get('/showMedicalRecords', (req, res) => {
     let drugallergy = 'Sofidroux antibiotic';
     let majorillness = 'None';
     
-    res.render('medicalrecords/displayMedicRecords', {
+    res.render('medicalrecords/displayRecords', {
         name: name,
         age: age,
         height: height,
@@ -33,8 +49,8 @@ router.get('/showMedicalRecords', (req, res) => {
 });
 
 // Enter medical records for the current patient
-router.get('/enterMedicalRecords', (req, res) => {
-    res.render('medicalrecords/enterRecords');
-});
+// router.get('/enterMedicalRecords', (req, res) => {
+//     res.render('medicalrecords/enterRecords');
+// });
 
 module.exports = router;

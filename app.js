@@ -9,12 +9,15 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const flash = require('connect-flash');
-const FlashMessenger = require('flash-messenger');
 
+// Library to use MySQL to store session objects
+const MySQLStore = require('express-mysql-session');
+const db = require('./config/db');
 
 // Load routes
 const mainRoute = require('./routes/main');
+const userRoute = require('./routes/user');
+const recordsRoute = require('./routes/records');
 
 
 // Bring in database connection
@@ -60,16 +63,39 @@ app.use(methodOverride('_method'));
 // Enables session to be stored using browser's Cookie ID
 app.use(cookieParser());
 
+// Express session middleware - uses MySQL to store session
+app.use(session({
+	key: 'selfcarerecords_session',
+	secret: 'tojiv',
+	store: new MySQLStore({
+		host: db.host,
+		port: 3306,
+		user: db.username,
+		password: db.password,
+		database: db.database,
+		clearExpired: true,
+
+		checkExpirationInterval: 900000,
+		expiration: 900000
+	}),
+
+	resave: false,
+	saveUninitialized: false
+}));
+
 
 app.use('/', mainRoute);
+app.use('/user', userRoute);
+app.use('/records', recordsRoute);
 
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known
 * ports such as 80 or 8080.
 * */
 const port = 5000;
+const weblink = 'http://localhost:5000'
 
 // Starts the server and listen to port 5000
 app.listen(port, () => {
-	console.log(`Server started on port ${port}`);
+	console.log(`Server started on port ${port}, use this link ${weblink}`);
 });
