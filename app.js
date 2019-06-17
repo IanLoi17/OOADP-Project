@@ -4,6 +4,9 @@
 
 const express = require('express');
 const session = require('express-session');
+const flash = require('connect-flash');
+const FlashMessenger = require('flash-messenger');
+const passport = require('passport');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
@@ -21,10 +24,14 @@ const recordsRoute = require('./routes/records');
 
 
 // Bring in database connection
-const selfcarerecords = require('./config/DBConnection');
+const selfcarerecordsDB = require('./config/DBConnection');
 
 // Connects to MySQL database
-selfcarerecords.setUpDB(false);
+selfcarerecordsDB.setUpDB(false);
+
+// Passport Config
+const authenticate = require('./config/passport');
+authenticate.localStrategy(passport);
 
 /*
 * Creates an Express server - Express is a web application framework for creating web applications
@@ -83,6 +90,37 @@ app.use(session({
 	saveUninitialized: false
 }));
 
+app.use(session({
+	key: 'selfcarerecords_session',
+	secret: 'tojiv',
+	resave: false,
+	saveUninitialized: false,
+}));
+
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
+app.use(FlashMessenger.middleware);
+
+app.use(function(req, res, next) {
+	res.locals.success_msg = req.flash('success_msg');
+	res.locals.error_msg = req.flash('error_msg');
+	res.locals.error = req.flash('error');
+	res.locals.user = req.user || null;
+	next();
+});
+
+app.use(function(req, res, next) {
+	next();
+});
+
+// Use Routes
+/*
+* Defines that any root URL with '/' that Node JS receives request from, for eg. http://localhost:5000/, will be handled by
+* mainRoute which was defined earlier to point to routes/main.js
+*/
 
 app.use('/', mainRoute);
 app.use('/user', userRoute);
@@ -91,7 +129,8 @@ app.use('/records', recordsRoute);
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known
 * ports such as 80 or 8080.
-* */
+*/
+
 const port = 5000;
 const weblink = 'http://localhost:5000'
 

@@ -2,46 +2,55 @@ const Sequelize = require('sequelize');
 const db = require('../config/DBConfig');
 
 const User = db.define('users',{
-    fullname: {
+    name: {
         type: Sequelize.STRING
     },
-    NRIC: {
+
+    occupation: {
         type: Sequelize.STRING
     },
+
+    nric: {
+        type: Sequelize.STRING
+    },
+
     email: {
         type: Sequelize.STRING
     },
+
     password: {
         type: Sequelize.STRING
     },
+
     age: {
         type: Sequelize.STRING
     },
+    
     gender: {
         type: Sequelize.STRING
 
     },
-    DOB: {
+    dateofbirth: {
         type: Sequelize.DATE
 
     },
     height: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10, 2)
 
     },
     weight: {
-        type: Sequelize.DECIMAL
+        type: Sequelize.DECIMAL(10, 1)
 
     },
-    blood: {
+    bloodtype: {
         type: Sequelize.STRING
 
     },
-    drug_allergy: {
+    drugallergy: {
         type: Sequelize.STRING
 
     },
-    major_illness: {
+    majorillness: {
         type: Sequelize.STRING
 
     }

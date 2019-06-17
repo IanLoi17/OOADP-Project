@@ -22,6 +22,10 @@
         <div class="card card-body">
             <div class="row">
                 <div class="col-sm-12">
+                    <h3 class="font-weight-bold">Patient No:<span class="">1</span></h3>
+                </div>
+
+                <div class="col-sm-12">
                     <fieldset>
                         <legend style="max-width:235px;"><i class="fas fa-user"></i> Patient's Particulars</legend>
                         <div class="row">
@@ -55,15 +59,16 @@
 
         <div class="card card-body">
             <div class="row">
-                <form action="/enterMedicalRecords" method="post" id="enterRecords">
+                <form action="" method="post" id="enterRecords">
                     <fieldset>
                         <legend style="max-width:276px;">Patient's Medical Records</legend>
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <label id="title" class="font-weight-bold" for="medicalrecords"><i class="fas fa-book-medical"></i> Medical Record(s):</label>
-                                <textarea class="col-sm-12 col-md-12 col-lg-12" id="medicalrecords" name="medicalrecords" 
-                                rows="8" cols="160" placeholder="Eg. "></textarea>
+                                <label id="title" class="font-weight-bold" for="medicalrecords"><i
+                                        class="fas fa-book-medical"></i> Medical Record(s):</label>
+                                <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="medicalrecords"
+                                    name="medicalrecords" rows="8" cols="160" placeholder="Eg. " required></textarea>
                             </div>
                         </div>
 
@@ -71,17 +76,16 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <label id="title" class="font-weight-bold" for="information"><i class="fa fa-info-circle"></i> Other information(s):</label>
-                                <textarea class="col-sm-12 col-md-12 col-lg-12" id="information" name="information" 
-                                rows="7" cols="160" placeholder="Eg."></textarea>
+                                <label id="title" class="font-weight-bold" for="information"><i
+                                        class="fa fa-info-circle"></i> Other information(s):</label>
+                                <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="information"
+                                    name="information" rows="7" cols="160" placeholder="Eg." required></textarea>
                             </div>
                         </div>
                     </fieldset>
+                    <br>
+                    <button type="submit" class="btn btn-info" action="/records/listRecords">Save</button>
                 </form>
-            </div>
-            <br>
-            <div class="row">
-                <button class="btn btn-outline-primary" type="submit">Save</button>
             </div>
         </div>
     </div>

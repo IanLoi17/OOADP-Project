@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const alertMessage = require('../helpers/messenger');
 
 // Home page
 router.get('/', (req, res) => {
@@ -14,12 +15,12 @@ router.get('/logout', (req, res) => {
 });
 
 // Login page
-router.get('/login', (req, res) => {
+router.get('/displaylogin', (req, res) => {
     res.render('user/login');
 });
 
 // Register page
-router.get('/register', (req, res) => {
+router.get('/displayregister', (req, res) => {
     res.render('user/register');
 });
 
@@ -48,9 +49,5 @@ router.get('/showMedicalRecords', (req, res) => {
     });
 });
 
-// Enter medical records for the current patient
-// router.get('/enterMedicalRecords', (req, res) => {
-//     res.render('medicalrecords/enterRecords');
-// });
 
 module.exports = router;

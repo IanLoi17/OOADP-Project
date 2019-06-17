@@ -93,3 +93,20 @@
     margin-bottom: -15%;
     color: #495057;
 }
+
+#registerlink:hover, #loginlink:hover {
+    text-decoration: none;
+}
+
+.message {
+    color: #767676;
+    font-size: 12px;
+}
+
+.btnRegister {
+    background-color: #2b86be;
+}
+
+.btnRegister:hover {
+    background-color: #3d98d1;
+}

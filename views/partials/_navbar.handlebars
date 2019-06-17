@@ -6,28 +6,39 @@
     <div id='cssmenu'>
         <ul>
             <li>
-                <a class="navbar-brand" href="/">Selfcare</a>
+                <a class="nav-link" href="/">Selfcare</a>
             </li>
 
             <li class='nav-item'>
-                <a class="nav-link" href='/showMedicalRecords'>Medical Records</a>
+                <a class="nav-link" href='#'>About</a>
             </li>
 
             <li class='nav-item'>
                 <a class="nav-link" href='#'>placeholder</a>
             </li>
-            
-            <li class="nav-item" style="width:914px;">
-                
+
+            <li class="nav-item" style="width:964px;">
+
+            </li>
+
+            {{#if user}}
+            <li class="nav-item">
+                <a class="nav-link" href="/showMedicalRecords">Medical Records</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-item" href='/login'>Login</a>
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+
+            {{else}}
+            <li class="nav-item">
+                <a class="nav-link" href="/displaylogin">Login</a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-item" href='/register'>Register</a>
+                <a class="nav-link" href="/displayregister">Register</a>
             </li>
+            {{/if}}
         </ul>
     </div>
 </nav>
