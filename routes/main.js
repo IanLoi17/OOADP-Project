@@ -8,6 +8,11 @@ router.get('/', (req, res) => {
     res.render('index', {title: title});
 });
 
+// About page
+router.get('/about', (req, res) => {
+    res.render('about');
+});
+
 // Logout user
 router.get('/logout', (req, res) => {
     req.logout();
@@ -22,31 +27,6 @@ router.get('/displaylogin', (req, res) => {
 // Register page
 router.get('/displayregister', (req, res) => {
     res.render('user/register');
-});
-
-// Display medical records for the current patient
-router.get('/showMedicalRecords', (req, res) => {
-    let name = 'John Tan';
-    let age = 19;
-    let height = '1.72 m';
-    let weight = '58.7 kg';
-    let gender = 'M';
-    let bloodtype = 'O';
-    let dateofbirth = '12/06/2000';
-    let drugallergy = 'Sofidroux antibiotic';
-    let majorillness = 'None';
-    
-    res.render('medicalrecords/displayRecords', {
-        name: name,
-        age: age,
-        height: height,
-        weight: weight,
-        gender: gender,
-        bloodtype: bloodtype,
-        dateofbirth: dateofbirth,
-        drugallergy: drugallergy,
-        majorillness: majorillness
-    });
 });
 
 

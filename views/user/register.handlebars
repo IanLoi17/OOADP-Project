@@ -5,18 +5,18 @@
         <div class="col-md-3 register-left">
             <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
             <h3>Welcome to Selfcare! It is time to keep yourself inform of your own health</h3>
-            <input type="submit" name="" value="Login" /><br />
+            {{!-- <input type="submit" name="" value="Login" /><br /> --}}
         </div>
         <div class="col-md-9 register-right">
-            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="width:23%;">
-                {{!-- <li class="nav-item">
+            {{!-- <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="width:23%;">
+                <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                         aria-controls="home" aria-selected="true">Patient</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                         aria-controls="profile" aria-selected="false">Doctor</a>
-                </li> --}}
+                </li>
 
                 <li class="nav-item">
                     <div class="custom-control custom-radio">
@@ -31,120 +31,139 @@
                         <label for="defaultUnchecked" class="custom-control-label">Doctor</label>
                     </div>
                 </li>
-            </ul>
+            </ul> --}}
 
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                     <form method="post" action="/user/register" class="was-validated">
-                        <h3 class="register-heading">Patient</h3>
+                        <h3 class="register-heading">Patient/Doctor</h3>
                         <div class="row register-form">
 
                             <div class="col-md-6">
-                                {{!-- <div class="form-group"> --}}
-                                <label for="drugallergy"></label>
-                                <textarea type="text" class="form-control" placeholder="Drug allergy(If any) *"
-                                    name="drugallergy" rows="9" cols="55"></textarea>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="drugallergy"></label>
+                                    <textarea type="text" class="form-control" placeholder="Drug allergy(If any) *"
+                                        name="drugallergy" rows="9" cols="55"></textarea>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="name"></label>
-                                <input type="text" class="form-control" placeholder="Full Name *" name="name" value=""
-                                    required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="name"></label>
+                                    <input type="text" class="form-control" placeholder="Full Name *" name="name" value=""
+                                        required />
+                                <div class="valid-feedback">Valid name</div>
+                                <div class="invalid-feedback">This field is required</div>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="gender"></label>
-                                <input type="text" class="form-control" placeholder="Gender *" name="gender" required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="occupation"></label>
+                                    <select class="form-control" name="occupation" required>
+                                        <option style="display:none" disabled selected value>--- Select your occupation ---</option>
+                                        <option value="Patient">Patient</option>
+                                        <option value="Doctor">Doctor</option>
+                                    </select>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="email"></label>
-                                <input type="email" class="form-control" placeholder="Email *" name="email" value=""
-                                    required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                    <div class="valid-feedback">Valid occupation</div>
+                                    <div class="invalid-feedback">Please select your occupation</div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="age"></label>
-                                <input type="text" class="form-control" placeholder="Age *" name="age" value=""
-                                    required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="password"></label>
-                                <input type="password" class="form-control" placeholder="Password *" name="password"
-                                    value="" required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="gender"></label>
+                                    <select class="form-control" name="gender" required>
+                                        <option style="display:none" disabled selected value>--- Select your gender ---</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                    {{!-- <input type="text" class="form-control" placeholder="Gender *" name="gender" required /> --}}
+                                    
+                                    <div class="valid-feedback">Valid gender</div>
+                                    <div class="invalid-feedback">Please select your gender</div>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="password2"></label>
-                                <input type="password" class="form-control" placeholder="Confirm Password *"
-                                    name="password2" style="margin-bottom:4px;" value="" required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="weight"></label>
+                                    <input type="text" class="form-control" placeholder="Weight *" name="weight" required />
+                                    <div class="valid-feedback">Valid weight</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="age"></label>
+                                    <input type="number" min="1" max="100" class="form-control" placeholder="Age *" name="age" value=""
+                                        required />
+                                    <div class="valid-feedback">Valid age</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password"></label>
+                                    <input type="password" class="form-control" placeholder="Password *" name="password"
+                                        value="" required />
+                                    <div class="valid-feedback">Valid password</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
 
                                 <p class="message">Already have an account click? <a class="text-primary" id="loginlink"
                                         href="/displaylogin">here</a> to log in</p>
                             </div>
 
                             <div class="col-md-6">
-                                {{!-- <div class="form-group"> --}}
-                                <label for="majorillness"></label>
-                                <textarea type="text" class="form-control" placeholder="Major illness(If any) *"
-                                    name="majorillness" rows="9" cols="55"></textarea>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="majorillness"></label>
+                                    <textarea type="text" class="form-control" placeholder="Major illness(If any) *"
+                                        name="majorillness" rows="9" cols="55"></textarea>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="nric"></label>
-                                <input type="text" class="form-control" placeholder="NRIC no. *" name="nric" value=""
-                                    required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="nric"></label>
+                                    <input type="text" class="form-control" placeholder="NRIC no. *" name="nric" value=""
+                                        required />
+                                    <div class="valid-feedback">Valid NRIC</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="dateofbirth"></label>
-                                <input type="text" class="form-control" name="dateofbirth" placeholder="Date of birth *"
-                                    required />
+                                <div class="form-group">
+                                    <label for="dateofbirth"></label>
+                                    <input type="date" class="form-control" name="dateofbirth" placeholder="Date of birth *"
+                                        required />
 
-                                {{!-- <input type="text" name="dateofbirth" id="date" class="form-control datepicker" value="" required />
-                                <label for="dateofbirth">Date of birth</label> --}}
+                                    {{!-- <input type="text" name="dateofbirth" id="date" class="form-control datepicker" value="" required />
+                                    <label for="dateofbirth">Date of birth</label> --}}
 
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                    <div class="valid-feedback">Valid date of birth</div>
+                                    <div class="invalid-feedback">Invalid date of birth</div>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="weight"></label>
-                                <input type="text" class="form-control" placeholder="Weight *" name="weight" required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="email"></label>
+                                    <input type="email" class="form-control" placeholder="Email *" name="email" value=""
+                                        required />
+                                    <div class="valid-feedback">Valid email</div>
+                                    <div class="invalid-feedback">An email must contain '@' and '.com'</div>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="height"></label>
-                                <input type="text" class="form-control" placeholder="Height *" name="height" required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="height"></label>
+                                    <input type="text" class="form-control" placeholder="Height *" name="height" required />
+                                    <div class="valid-feedback">Valid height</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
 
-                                {{!-- <div class="form-group"> --}}
-                                <label for="bloodtype"></label>
-                                <input type="text" class="form-control" placeholder="Blood type *" name="bloodtype"
-                                    required />
-                                <div class="valid-feedback"></div>
-                                <div class="invalid-feedback"></div>
-                                {{!-- </div> --}}
+                                <div class="form-group">
+                                    <label for="bloodtype"></label>
+                                    <input type="text" class="form-control" placeholder="Blood type *" name="bloodtype"
+                                        required />
+                                    <div class="valid-feedback">Valid blood type</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password2"></label>
+                                    <input type="password" class="form-control" placeholder="Confirm Password *"
+                                        name="password2" style="margin-bottom:4px;" value="" required />
+                                    <div class="valid-feedback">Valid password</div>
+                                    <div class="invalid-feedback">This field is required</div>
+                                </div>
 
                                 {{!-- <div class="form-group"> --}}
                                 <input type="submit" class="btnRegister" value="Register" style="margin-top:191px;" />
@@ -153,43 +172,33 @@
                     </form>
                 </div>
             </div>
-            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            {{!-- <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <form method="post" action="/user/register">
                     <h3 class="register-heading">Doctor</h3>
                     <div class="row register-form">
                         <div class="col-md-6">
-                            {{!-- <div class="form-group"> --}}
                             <label for="name"></label>
                             <input type="text" class="form-control" placeholder="Full Name *" name="name" value="" />
-                            {{!-- </div> --}}
 
-                            {{!-- <div class="form-group"> --}}
                             <label for="nric"></label>
                             <input type="text" class="form-control" placeholder="NRIC no. *" name="nric" value="" />
-                            {{!-- </div> --}}
 
-                            {{!-- <div class="form-group"> --}}
                             <label for="email"></label>
                             <input type="email" class="form-control" placeholder="Email *" name="email" value=""
                                 style="margin-bottom:4px;" />
-                            {{!-- </div> --}}
 
                             <p class="message">Already have an account click? <a class="text-primary" id="loginlink"
                                     href="/displaylogin">here</a> to log in</p>
 
                         </div>
                         <div class="col-md-6">
-                            {{!-- <div class="form-group"> --}}
                             <label for="password"></label>
                             <input type="password" class="form-control" placeholder="Password *" name="password"
                                 value="" />
-                            {{!-- </div> --}}
 
-                            {{!-- <div class="form-group"> --}}
                             <label for="password2"></label>
                             <input type="password" class="form-control" placeholder="Confirm Password *"
                                 name="password2" value="" />
-                            {{!-- </div> --}}
 
                             <div class="form-group">
                             </div>
@@ -198,32 +207,14 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> --}}
         </div>
         </form>
     </div>
 </div>
 </div>
 <script>
-    window.onload = function () {
-        const patient = document.getElementById("defaultChecked");
-        const doctor = document.getElementById("defaultUnchecked");
-
-        patient.onclick = Patient;
-        doctor.onclick = Doctor;
-
-        function Patient() {
-            document.getElementById("home").style.display = "block";
-            document.getElementById("profile").style.display = "none";
-        }
-
-        function Doctor() {
-            document.getElementById("home").style.display = "none";
-            document.getElementById("profile").style.display = "block";
-        }
-    }
-
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.datepicker').pickdate();
         $('.datepicker').removeAttr('readonly');
     });

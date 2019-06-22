@@ -1,8 +1,68 @@
+<link rel="stylesheet" type="text/css" href="/css/listRecords.css">
 <div class="container">
-    {{!-- {{#if records}} --}}
+{{#if records}}
     <div class="card card-body">
-        <h3 class="text-primary">List of Medical Records</h3>
-        {{!-- {{#each records}} --}}
-        
+        <h3 class="text-dark font-weight-bold">Medical Records List</h3>
+        {{#each records}}
+            <div class="card-border mb-2 w-100 mx-auto">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Name:</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Email:</p>
+                            <p class="text-info"></p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Age:</p>
+                            <p class="text-info"></p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Height:</p>
+                            <p class="text-info"></p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Weight:</p>
+                            <p class="text-info"></p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Blood type:</p>
+                            <p class="text-info"></p>
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="accordion" id="recordsAccordion">
+					<div class="card-header" id="headingOne">
+						<button id="recordsCollapse" class="btn btn-link" type="button" data-toggle="collapse"
+								data-target="#collapseOne{{id}}"
+								aria-expanded="false" aria-controls="collapseOne">
+							Records <i class="fas fa-chevron-down"></i>
+						</button>
+
+					</div>
+
+					<div id="collapseOne{{id}}" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
+						<div class="card-body">
+                            <p class="font-italic">Medical Records:</p>
+                            <p class="text-primary font-weight-bold">{{records}}</p>
+                            <br>
+                            <p class="font-italic">Important Information:</p>
+                            <p class="text-primary font-weight-bold">{{information}}</p>
+                        </div>
+					</div>
+				</div>
+            </div>
+        {{/each}}
     </div>
 </div>
+
+{{else}}
+    <h3 class="text-dark font-weight-bold">No medical records for this patient</h3>
+{{/if}}

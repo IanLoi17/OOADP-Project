@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const alertMessage = require('../helpers/messenger');
 const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const alertMessage = require('../helpers/messenger');
 
 // User register URL using HTTP post => /user/register
 router.post('/register', (req, res) => {
@@ -26,7 +26,7 @@ router.post('/register', (req, res) => {
         res.render('user/register', {
             errors,
             name,
-            occupation: occupation,
+            occupation,
             nric,
             gender,
             dateofbirth,
@@ -36,7 +36,9 @@ router.post('/register', (req, res) => {
             weight,
             height,
             drugallergy,
-            majorillness
+            majorillness,
+            password,
+            password2
         })
     }
 
@@ -47,7 +49,7 @@ router.post('/register', (req, res) => {
                 // If user is found, that means email has been registered
                 res.render('user/register', {
                     name,
-                    occupation: occupation,
+                    occupation,
                     nric,
                     gender,
                     dateofbirth,
@@ -57,20 +59,25 @@ router.post('/register', (req, res) => {
                     weight,
                     height,
                     drugallergy,
-                    majorillness
+                    majorillness,
+                    password,
+                    password2
                 })
                 alertMessage(res, 'danger', user.email + ' already registered! Use another email!', 'fa fa-warning', true);
             }
 
             else {
+                // Create a new user record
+
                 password = req.body.password;
-                bcrypt.genSalt(10, function (err, salt) {
-                    bcrypt.hash("B4c0/\/", salt, function (err, hash) {
-                        password = bcrypt.hashSync(password, salt)
+                bcrypt.genSalt(10, function(err, salt) {
+                    bcrypt.hash("B4c0/\/", salt, function(err, hash) {
+                        // Store hash in your password DB
+                        password = bcrypt.hashSync(password, salt);
 
                         User.create({
                             name,
-                            occupation: occupation,
+                            occupation,
                             nric,
                             gender,
                             dateofbirth,
@@ -79,32 +86,32 @@ router.post('/register', (req, res) => {
                             bloodtype,
                             weight,
                             height,
-                            password,
                             drugallergy,
-                            majorillness
+                            majorillness,
+                            password
                         }).then(user => {
                             alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
-                            res.redirect('/displaylogin')
+                            res.redirect('/displaylogin');
                         })
+                        .catch(err => console.log(err));
                     })
                 })
             }
-        })
+        });
     }
 });
 
-// Login form POST => /user/login
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',                   // Route to the home page URL
-        failureRedirect: '/displaylogin',       // Route to /login page URL
+        successRedirect: '/',                   // Route to /records/listRecords URL
+        failureRedirect: '/displaylogin',       // Route to /login URL
         failureFlash: true
-        /*  Setting the failureFlash option to true instructs Passport to flash an error
-            message using the message given by the strategy's verify callback, if any.
-            When a failure occur passport passes the message object as error 
-        */
 
+        /* Setting the failureFlash option to true instructs Passport to flash an error
+        sage using the message given by the strategy's verify callback, if any.
+        When a failure occur passport passes the message object as error 
+        */
     })(req, res, next);
-});
+})
 
 module.exports = router;

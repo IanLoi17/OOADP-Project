@@ -5,18 +5,18 @@
         <div class="col-md-3 register-left">
             <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
             <h3>Welcome to Selfcare! It is time to keep yourself inform of your own health</h3>
-            <input type="submit" name="" value="Register" /><br />
+            {{!-- <input type="submit" name="" value="Register" /><br /> --}}
         </div>
         <div class="col-md-9 register-right">
-            <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="width:23%;">
-                {{!-- <li class="nav-item">
+            {{!-- <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist" style="width:23%;">
+                <li class="nav-item">
                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                         aria-controls="home" aria-selected="true">Patient</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                         aria-controls="profile" aria-selected="false">Doctor</a>
-                </li> --}}
+                </li>
 
                 <li class="nav-item">
                     <div class="custom-control custom-radio">
@@ -30,25 +30,30 @@
                         <input type="radio" class="custom-control-input" name="occupation" id="defaultUnchecked">
                         <label for="defaultUnchecked" class="custom-control-label">Doctor</label>
                     </div>
-                </li>
+                </li> --}}
             </ul>
 
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <form method="post" action="/user/login">
-                        <h3 class="register-heading">Patient</h3>
+                    <form method="post" action="/user/login" class="was-validated">
+                        <h3 class="register-heading">Patient/Doctor</h3>
                         <div class="row register-form">
                             <div class="col-md-6">
                                 <div class="form-group" style="margin-bottom:4px;">
-                                    <input type="email" class="form-control" placeholder="Email *" value="" />
+                                    <input type="email" class="form-control" name="email" placeholder="Email *" value="" required />
+                                    <div class="valid-feedback">Valid email</div>
+                                    <div class="invalid-feedback">An email must contain '@' and '.com'</div>
                                 </div>
 
-                                <p class="message">Do not have an account? Click <a id="registerlink" class="text-primary" href="/displayregister">here</a> to register for one</p>
+                                <p class="message">Do not have an account? Click <a id="registerlink"
+                                    class="text-primary" href="/displayregister">here</a> to register for one</p>
 
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password *" value="" />
+                                    <input type="password" class="form-control" name="password" placeholder="Password *" value="" required />
+                                    <div class="valid-feedback">Valid password</div>
+                                    <div class="invalid-feedback">Invalid password</div>
                                 </div>
 
                                 <div class="form-group">
@@ -59,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            {{!-- <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <form method="post" action="/user/login">
                     <h3 class="register-heading">Doctor</h3>
                     <div class="row register-form">
@@ -68,7 +73,8 @@
                                 <input type="email" class="form-control" placeholder="Email *" value="" />
                             </div>
 
-                            <p class="message">Do not have an account? Click <a id="registerlink" class="text-primary" href="/displayregister">here</a> to register for one</p>
+                            <p class="message">Do not have an account? Click <a id="registerlink" class="text-primary"
+                                    href="/displayregister">here</a> to register for one</p>
 
                         </div>
                         <div class="col-md-6">
@@ -82,27 +88,8 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
 </div>
-<script>
-    window.onload = function() {
-        const patient = document.getElementById("defaultChecked");
-        const doctor = document.getElementById("defaultUnchecked");
-
-        patient.onclick = Patient;
-        doctor.onclick = Doctor;
-
-        function Patient() {
-            document.getElementById("home").style.display = "block";
-            document.getElementById("profile").style.display = "none";
-        }
-
-        function Doctor() {
-            document.getElementById("home").style.display = "none";
-            document.getElementById("profile").style.display = "block";
-        }
-    }
-</script>

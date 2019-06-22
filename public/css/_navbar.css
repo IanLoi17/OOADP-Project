@@ -118,3 +118,7 @@ html, body {
     -webkit-box-shadow: inset 0 5px 10px #133e40;
     box-shadow: inset 0 5px 10px #133e40;
 }
+
+#dropdown-menu {
+    background-color: #1e6468;
+}

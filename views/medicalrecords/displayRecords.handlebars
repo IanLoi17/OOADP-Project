@@ -13,13 +13,13 @@
                         <legend style="max-width:235px;"><i class="fas fa-user"></i> Personal Particulars</legend>
                         <div class="row">
                             <div class="col-sm-3">Name: <span id="name">{{name}}</span></div>
-                            <div class="col-sm-3">Height: <span id="height">{{height}}</span></div>
+                            <div class="col-sm-3">Height: <span id="height">{{height}} m</span></div>
                             <div class="col-sm-6">Drug Allergy: <span id="drugallergy">{{drugallergy}}</span></div>
                         </div>
                         <br>
                         <div class="row">
                             <div class="col-sm-3">Age: <span>{{age}}</span></div>
-                            <div class="col-sm-3">Weight: <span>{{weight}}</span></div>
+                            <div class="col-sm-3">Weight: <span>{{weight}} kg</span></div>
                         </div>
                         <br>
                         <div class="row">
@@ -37,19 +37,25 @@
             <br>
             <br>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <h3>Your Medical Record(s):</h3>
-                    <textarea class="col-sm-6 col-md-12 col-lg-11 form-control" rows="10" cols="60" disabled>None</textarea>
-                    {{!-- <p style="font-family:Source Sans Pro;">Updated on:</p> --}}
-                </div>
-
-                <div class="col-sm-6">
-                    <h3>Important information(s):</h3>
-                    <textarea class="col-sm-6 col-md-12 col-lg-12 form-control" rows="10" cols="70" disabled>None</textarea>
+                    <textarea class="col-sm-6 col-md-12 col-lg-12 form-control" rows="15" cols="70" disabled>None</textarea>
                     {{!-- <p style="font-family:Source Sans Pro;">Updated on:</p> --}}
                 </div>
             </div>
+
             <br>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3>Important information(s):</h3>
+                    <textarea class="col-sm-6 col-md-12 col-lg-12 form-control" rows="15" cols="70" disabled>None</textarea>
+                    {{!-- <p style="font-family:Source Sans Pro;">Updated on:</p> --}}
+                </div>
+            </div>
+
+            <br>
+            
             <div class="row">
                 <div class="col-sm-12">
                     <button class="btn btn-outline-primary" onclick="home()">Home <i class="fa fa-home"></i></button>

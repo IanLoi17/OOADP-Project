@@ -23,7 +23,7 @@ const User = db.define('users',{
     },
 
     age: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
     },
     
     gender: {

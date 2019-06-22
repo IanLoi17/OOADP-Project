@@ -10,21 +10,26 @@
             </li>
 
             <li class='nav-item'>
-                <a class="nav-link" href='#'>About</a>
+                <a class="nav-link" href='/about'>About</a>
             </li>
 
-            <li class='nav-item'>
-                <a class="nav-link" href='#'>placeholder</a>
-            </li>
-
-            <li class="nav-item" style="width:964px;">
-
-            </li>
+            <li class="nav-item" style="width:1104px;"></li>
 
             {{#if user}}
             <li class="nav-item">
-                <a class="nav-link" href="/showMedicalRecords">Medical Records</a>
+                <a class="nav-link" href="/records/showRecords">Personal Medical Records</a>
             </li>
+            
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" id="navbarDropdownMenuLink">Medical Records</a>
+
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <a class="droptown-item" href="/records/addRecords">Add Medical Records</a>
+                    <a class="droptown-item" href="/records/listRecords">Medical Records List</a>
+                </div>
+            </li>
+
+            <li class="nav-item" style="width:800px;"></li>
 
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
