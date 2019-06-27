@@ -110,3 +110,7 @@
 .btnRegister:hover {
     background-color: #3d98d1;
 }
+
+.input-group-addon {
+    padding: 7px;
+}

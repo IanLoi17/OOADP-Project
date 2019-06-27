@@ -10,6 +10,10 @@ const User = db.define('users',{
         type: Sequelize.STRING
     },
 
+    patientID: {
+        type: Sequelize.STRING
+    },
+
     nric: {
         type: Sequelize.STRING
     },
@@ -25,34 +29,45 @@ const User = db.define('users',{
     age: {
         type: Sequelize.INTEGER
     },
+
+    mobileNo: {
+        type: Sequelize.INTEGER
+    },
+
+    housephoneNo: {
+        type: Sequelize.INTEGER
+    },
     
     gender: {
         type: Sequelize.STRING
-
     },
+
     dateofbirth: {
         type: Sequelize.DATE
-
     },
+
     height: {
         type: Sequelize.DECIMAL(10, 2)
 
     },
+
     weight: {
         type: Sequelize.DECIMAL(10, 1)
 
     },
+
     bloodtype: {
         type: Sequelize.STRING
 
     },
+
     drugallergy: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(5000)
 
     },
-    majorillness: {
-        type: Sequelize.STRING
 
+    majorillness: {
+        type: Sequelize.STRING(5000)
     }
 });
 

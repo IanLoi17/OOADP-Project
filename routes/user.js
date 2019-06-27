@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const alertMessage = require('../helpers/messenger');
+const upload = require('../helpers/imageUpload');
 const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -11,8 +12,9 @@ router.post('/register', (req, res) => {
     let errors = [];
 
     // Retrieves fields from register page
-    let {name, occupation, nric, gender, email, age, bloodtype, weight, height, password, password2, drugallergy, majorillness} = req.body;
+    let {name, occupation, nric, gender, mobileNo, housephoneNo, email, age, bloodtype, weight, height, password, password2, drugallergy, majorillness} = req.body;
     let dateofbirth = moment(req.body.dateofbirth, 'DD/MM/YYYY');
+    let patientID = req.body.nric;
 
     if (req.body.password !== req.body.password2) {
         errors.push({ text: 'Passwords do not match!' });
@@ -29,6 +31,8 @@ router.post('/register', (req, res) => {
             occupation,
             nric,
             gender,
+            mobileNo,
+            housephoneNo,
             dateofbirth,
             email,
             age,
@@ -52,6 +56,8 @@ router.post('/register', (req, res) => {
                     occupation,
                     nric,
                     gender,
+                    mobileNo,
+                    housephoneNo,
                     dateofbirth,
                     email,
                     age,
@@ -68,32 +74,60 @@ router.post('/register', (req, res) => {
 
             else {
                 // Create a new user record
-
                 password = req.body.password;
                 bcrypt.genSalt(10, function(err, salt) {
                     bcrypt.hash("B4c0/\/", salt, function(err, hash) {
                         // Store hash in your password DB
                         password = bcrypt.hashSync(password, salt);
+                        
+                        if (occupation == 'Patient') {
+                            User.create({
+                                name,
+                                occupation,
+                                patientID: patientID,
+                                nric,
+                                gender,
+                                mobileNo,
+                                housephoneNo,
+                                dateofbirth,
+                                email,
+                                age,
+                                bloodtype,
+                                weight,
+                                height,
+                                drugallergy,
+                                majorillness,
+                                password
+                            }).then(user => {
+                                alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                res.redirect('/displaylogin');
+                            })
+                            .catch(err => console.log(err));
+                        }
 
-                        User.create({
-                            name,
-                            occupation,
-                            nric,
-                            gender,
-                            dateofbirth,
-                            email,
-                            age,
-                            bloodtype,
-                            weight,
-                            height,
-                            drugallergy,
-                            majorillness,
-                            password
-                        }).then(user => {
-                            alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
-                            res.redirect('/displaylogin');
-                        })
-                        .catch(err => console.log(err));
+                        else {
+                            User.create({
+                                name,
+                                occupation,
+                                nric,
+                                gender,
+                                mobileNo,
+                                housephoneNo,
+                                dateofbirth,
+                                email,
+                                age,
+                                bloodtype,
+                                weight,
+                                height,
+                                drugallergy,
+                                majorillness,
+                                password
+                            }).then(user => {
+                                alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                res.redirect('/displaylogin');
+                            })
+                            .catch(err => console.log(err));
+                        }
                     })
                 })
             }
@@ -112,6 +146,16 @@ router.post('/login', (req, res, next) => {
         When a failure occur passport passes the message object as error 
         */
     })(req, res, next);
-})
+});
+
+router.get('/profile', (req, res) => {
+    let name = req.user.name;
+    let email = req.user.email;
+
+    res.render('user/profile', {
+        name: name,
+        email: email
+    });
+});
 
 module.exports = router;

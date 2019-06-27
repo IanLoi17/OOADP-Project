@@ -1,4 +1,18 @@
 <link rel="stylesheet" type="text/css" href="/css/logReg.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $('.datepicker').datepicker({
+            format: 'dd/mm/yyyy',
+            value: new Date().toLocaleDateString('en-AUS'),
+            uiLibrary: 'bootstrap4',
+        });
+    });
+    
+</script>
 
 <div class="container register">
     <div class="row">
@@ -41,66 +55,90 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="drugallergy"></label>
+
                                     <textarea type="text" class="form-control" placeholder="Drug allergy(If any) *"
-                                        name="drugallergy" rows="9" cols="55"></textarea>
+                                        name="drugallergy" rows="9" cols="55" value="{{drugallergy}}"></textarea>
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Optional to enter
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name"></label>
-                                    <input type="text" class="form-control" placeholder="Full Name *" name="name" value=""
-                                        required />
-                                <div class="valid-feedback">Valid name</div>
-                                <div class="invalid-feedback">This field is required</div>
+
+                                    <input type="text" class="form-control" placeholder="Full Name *" name="name" autocomplete="off"
+                                        value="{{name}}" required />
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid name</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="occupation"></label>
-                                    <select class="form-control" name="occupation" required>
-                                        <option style="display:none" disabled selected value>--- Select your occupation ---</option>
+
+                                    <select class="form-control" name="occupation" value="{{occupation}}" required>
+                                        <option style="display:none" disabled selected value>--- Select your occupation
+                                            ---</option>
                                         <option value="Patient">Patient</option>
                                         <option value="Doctor">Doctor</option>
                                     </select>
 
-                                    <div class="valid-feedback">Valid occupation</div>
-                                    <div class="invalid-feedback">Please select your occupation</div>
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid occupation
+                                    </div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please
+                                        select your occupation</div>
 
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="gender"></label>
-                                    <select class="form-control" name="gender" required>
-                                        <option style="display:none" disabled selected value>--- Select your gender ---</option>
+
+                                    <select class="form-control" name="gender" value="{{gender}}" required>
+                                        <option style="display:none" disabled selected value>--- Select your gender ---
+                                        </option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                     </select>
-                                    {{!-- <input type="text" class="form-control" placeholder="Gender *" name="gender" required /> --}}
-                                    
-                                    <div class="valid-feedback">Valid gender</div>
-                                    <div class="invalid-feedback">Please select your gender</div>
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid gender</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please
+                                        select your gender</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="weight"></label>
-                                    <input type="text" class="form-control" placeholder="Weight *" name="weight" required />
-                                    <div class="valid-feedback">Valid weight</div>
-                                    <div class="invalid-feedback">This field is required</div>
+
+                                    <input type="text" class="form-control" value="{{mobileNo}}" name="mobileNo" autocomplete="off"
+                                        placeholder="Mobile Phone Number *" required />
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid phone number
+                                    </div>
+                                    <div class="invalid-feedback"><i class="fa fa-exclamation-circle"></i> Invalid phone
+                                        number</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="age"></label>
-                                    <input type="number" min="1" max="100" class="form-control" placeholder="Age *" name="age" value=""
+
+                                    <input type="text" class="form-control" placeholder="Weight *" value="{{weight}}" name="weight" autocomplete="off"
                                         required />
-                                    <div class="valid-feedback">Valid age</div>
-                                    <div class="invalid-feedback">This field is required</div>
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid weight</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="password"></label>
+
+                                    <input type="number" min="1" max="100" class="form-control" placeholder="Age *" autocomplete="off"
+                                        name="age" value="{{age}}" required />
+                                    
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid age</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
+                                </div>
+
+                                <div class="form-group">
+
                                     <input type="password" class="form-control" placeholder="Password *" name="password"
                                         value="" required />
-                                    <div class="valid-feedback">Valid password</div>
-                                    <div class="invalid-feedback">This field is required</div>
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid password</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
                                 </div>
 
                                 <p class="message">Already have an account click? <a class="text-primary" id="loginlink"
@@ -109,64 +147,93 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="majorillness"></label>
+
                                     <textarea type="text" class="form-control" placeholder="Major illness(If any) *"
-                                        name="majorillness" rows="9" cols="55"></textarea>
+                                        name="majorillness" value="{{majorillness}}" rows="9" cols="55"></textarea>
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Optional to enter
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="nric"></label>
-                                    <input type="text" class="form-control" placeholder="NRIC no. *" name="nric" value=""
+
+                                    <input type="text" class="form-control" placeholder="NRIC no. *" name="nric" autocomplete="off"
+                                        value="{{nric}}" required />
+                                    
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid NRIC</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
+                                </div>
+
+                                <div class="form-group" data-provide="datepicker">
+
+                                    {{!-- <input id="datepicker" type="text" class="form-control" name="dateofbirth"
+                                        placeholder="Date of birth *" required /> --}}
+                                    
+                                    {{!-- <input class="datepicker form-control" placeholder="Date of birth *" name="dateofbirth" data-date-format="mm/dd/yyyy" required /> --}}
+
+                                    <input type="text" class="form-control datepicker" name="dateofbirth" value="{{formatDate dateofbirth 'MM/DD/YYYY'}}" placeholder="Date of birth(MM/DD/YYYY) *" autocomplete="off" required />
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid date of birth
+                                    </div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Invalid date
+                                        of birth</div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="email" class="form-control" placeholder="Email *" name="email" value="{{email}}" autocomplete="off"
                                         required />
-                                    <div class="valid-feedback">Valid NRIC</div>
-                                    <div class="invalid-feedback">This field is required</div>
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid email</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> An email
+                                        must contain '@' and '.com'</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="dateofbirth"></label>
-                                    <input type="date" class="form-control" name="dateofbirth" placeholder="Date of birth *"
+
+                                    <input type="text" class="form-control" name="housephoneNo" autocomplete="off"
+                                        value="{{housephoneNo}}" placeholder="House Phone Number *" required />
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid phone number
+                                    </div>
+                                    <div class="invalid-feedback"><i class="fa fa-exclamation-circle"></i> Invalid phone
+                                        number</div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <input type="text" class="form-control" placeholder="Height *" value="{{height}}" name="height" autocomplete="off"
                                         required />
 
-                                    {{!-- <input type="text" name="dateofbirth" id="date" class="form-control datepicker" value="" required />
-                                    <label for="dateofbirth">Date of birth</label> --}}
-
-                                    <div class="valid-feedback">Valid date of birth</div>
-                                    <div class="invalid-feedback">Invalid date of birth</div>
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid height</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="email"></label>
-                                    <input type="email" class="form-control" placeholder="Email *" name="email" value=""
+
+                                    <input type="text" class="form-control" placeholder="Blood type *" value="{{bloodtype}}" name="bloodtype" autocomplete="off"
                                         required />
-                                    <div class="valid-feedback">Valid email</div>
-                                    <div class="invalid-feedback">An email must contain '@' and '.com'</div>
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid blood type
+                                    </div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="height"></label>
-                                    <input type="text" class="form-control" placeholder="Height *" name="height" required />
-                                    <div class="valid-feedback">Valid height</div>
-                                    <div class="invalid-feedback">This field is required</div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="bloodtype"></label>
-                                    <input type="text" class="form-control" placeholder="Blood type *" name="bloodtype"
-                                        required />
-                                    <div class="valid-feedback">Valid blood type</div>
-                                    <div class="invalid-feedback">This field is required</div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="password2"></label>
                                     <input type="password" class="form-control" placeholder="Confirm Password *"
                                         name="password2" style="margin-bottom:4px;" value="" required />
-                                    <div class="valid-feedback">Valid password</div>
-                                    <div class="invalid-feedback">This field is required</div>
+                                    
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid password</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> This field
+                                        is required</div>
                                 </div>
 
                                 {{!-- <div class="form-group"> --}}
-                                <input type="submit" class="btnRegister" value="Register" style="margin-top:191px;" />
+                                <input type="submit" class="btnRegister" value="Register" style="margin-top:20px;" />
                                 {{!-- </div> --}}
                             </div>
                     </form>
@@ -213,9 +280,3 @@
     </div>
 </div>
 </div>
-<script>
-    $(document).ready(function () {
-        $('.datepicker').pickdate();
-        $('.datepicker').removeAttr('readonly');
-    });
-</script>

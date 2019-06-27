@@ -4,38 +4,63 @@
     <div class="card card-body">
         <h3 class="text-dark font-weight-bold">Medical Records List</h3>
         {{#each records}}
-            <div class="card-border mb-2 w-100 mx-auto">
+            <div class="card-border border border-primary mb-2 w-100 mx-auto" style="border-radius:5px;">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-3">
                             <p class="font-italic">Name:</p>
+                            <p class="text-info">{{name}}</p>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Email:</p>
+                            <p class="font-italic">Gender:</p>
+                            <p class="text-info"></p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">NRIC no:</p>
                             <p class="text-info"></p>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-3">
                             <p class="font-italic">Age:</p>
+                            <p class="text-info">{{age}}</p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <p class="font-italic">Date of birth:</p>
                             <p class="text-info"></p>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Height:</p>
-                            <p class="text-info"></p>
+                            <p class="font-italic">Height(m):</p>
+                            <p class="text-info">{{height}}</p>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Weight:</p>
-                            <p class="text-info"></p>
+                            <p class="font-italic">Weight(kg):</p>
+                            <p class="text-info">{{weight}}</p>
                         </div>
 
                         <div class="col-sm-12 col-md-12 col-lg-3">
                             <p class="font-italic">Blood type:</p>
-                            <p class="text-info"></p>
+                            <p class="text-info">{{bloodtype}}</p>
                         </div>
-                    </div>    
+
+                        
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <div class="btn-group">
+                                <a href="#" role="button" class="btn btn-secondary btn-sm">
+                                    <i class="fas fa-pencil-alt"></i> Edit
+                                </a>
+
+                                <a href="#" role="button" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="accordion" id="recordsAccordion">

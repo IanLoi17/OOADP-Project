@@ -22,6 +22,9 @@ const mainRoute = require('./routes/main');
 const userRoute = require('./routes/user');
 const recordsRoute = require('./routes/records');
 
+// Bring in handlebars helpers
+const {formatDate} = require('./helpers/hbs');
+
 
 // Bring in database connection
 const selfcarerecordsDB = require('./config/DBConnection');
@@ -49,9 +52,16 @@ const app = express();
 * 3. 'defaultLayout' specifies the main.handlebars file under views/layouts as the main template
 *
 * */
+
+// Handlebars middleware
 app.engine('handlebars', exphbs({
+	helpers: {
+		formatDate: formatDate,
+	},
+
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
 }));
+
 app.set('view engine', 'handlebars');
 
 
@@ -59,6 +69,7 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
+
 app.use(bodyParser.json());
 
 // Creates static folder for publicly accessible HTML, CSS and Javascript files
@@ -127,15 +138,15 @@ app.use('/', mainRoute);
 app.use('/user', userRoute);
 app.use('/records', recordsRoute);
 
+
 /*
 * Creates a unknown port 5000 for express server since we don't want our app to clash with well known
 * ports such as 80 or 8080.
 */
 
 const port = 5000;
-const weblink = 'http://localhost:5000'
 
 // Starts the server and listen to port 5000
 app.listen(port, () => {
-	console.log(`Server started on port ${port}, use this link ${weblink}`);
+	console.log(`Server started on port ${port} at: \x1b[36mhttp://localhost:${port}\x1b[0m`);
 });

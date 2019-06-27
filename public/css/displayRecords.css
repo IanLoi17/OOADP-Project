@@ -14,6 +14,7 @@ fieldset {
     padding-bottom: 0.625em;
     padding-left: 0.75em;
     padding-right: 0.75em;
-    border: 2px groove;
+    border: 1px groove black;
     border-radius: 10px;
+    background-color: white;
 }

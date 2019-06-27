@@ -17,36 +17,60 @@
 </style>
 <div class="container">
     <div>
-        <h1 class="text-center">Entering Medical Records</h1>
+        <div class="card-body">
+            <h1 class="font-weight-bold text-dark">Add Medical Records</h1>
+        </div>
 
         <div class="card card-body">
             <div class="row">
                 <div class="col-sm-12">
-                    <h3 class="font-weight-bold">Patient No: <span class="">{{user.id}}</span></h3>
+                    <div class="input-group">
+                        {{!-- <input type="text" name="patientid" class="form-control"
+                            placeholder="Enter the patient ID to retrieve the particulars of that user *" /> --}}
+                        
+                        <input type="text" name="patientid" class="form-control" placeholder="Enter the patient ID to retrieve the particulars of the patient *" />
+                        <span class="input-group-btn">
+                            <a href="#" class="btn btn-info" role="button">Find <i class="fa fa-search"></i></a>
+                        </span>
+                    </div>
                 </div>
+            </div>
 
+            <br>
+
+            <div class="row">
                 <div class="col-sm-12">
                     <fieldset>
-                        <legend style="max-width:235px;"><i class="fas fa-user"></i> Patient's Particulars</legend>
                         <div class="row">
-                            <div class="col-sm-3">Name: <span id="name"></span></div>
-                            <div class="col-sm-3">Height: <span id="height"></span></div>
-                            <div class="col-sm-6">Drug Allergy: <span id="drugallergy"></span></div>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <legend class="font-weight-bold"><i class="fas fa-user"></i> Patient's Particulars</legend>
+                            </div>
                         </div>
-                        <br>
+
                         <div class="row">
-                            <div class="col-sm-3">Age: <span id="age"></span></div>
-                            <div class="col-sm-3">Weight: <span id="weight"></span></div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm-3">Gender: <span id="gender"></span></div>
-                            <div class="col-sm-3">Blood Type:<span id="bloodtype"></span></div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-sm-6">Date of birth: <span id="dateofbirth"></div>
-                            <div class="col-sm-6">Major illness(Dengue, H1N1, etc.): <span id="majorillness"></span>
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">Name:</p>
+                                <p class="text-info font-weight-bold">{{name}}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">Age:</p>
+                                <p class="text-info font-weight-bold">{{age}}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">Height:</p>
+                                <p class="text-info font-weight-bold">{{height}}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">Weight:</p>
+                                <p class="text-info font-weight-bold">{{weight}}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">Blood type:</p>
+                                <p class="text-info font-weight-bold">{{bloodtype}}</p>
                             </div>
                         </div>
                     </fieldset>
@@ -61,7 +85,11 @@
             <div class="row">
                 <form action="" method="post" id="enterRecords" class="was-validated">
                     <fieldset>
-                        <legend style="max-width:276px;">Patient's Medical Records</legend>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <legend class="font-weight-bold">Patient's Medical Records</legend>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-sm-12">
@@ -69,9 +97,13 @@
                                     <label id="title" class="font-weight-bold" for="medicalrecords"><i
                                             class="fas fa-book-medical"></i> Medical Record(Required):</label>
                                     <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="medicalrecords"
-                                        name="medicalrecords" rows="8" cols="160" placeholder="Eg. " required></textarea>
-                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Medical records are valid</div>
-                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please enter medical records of patient</div>
+                                        name="medicalrecords" rows="8" cols="160" placeholder="Eg. "
+                                        required></textarea>
+                                        
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Medical records are
+                                        valid</div>
+                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please enter
+                                        medical records of patient</div>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +117,8 @@
                                             class="fa fa-info-circle"></i> Other information(Optional):</label>
                                     <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="information"
                                         name="information" rows="7" cols="160" placeholder="Eg."></textarea>
-                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Optional to enter</div>
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Optional to enter
+                                    </div>
                                 </div>
                             </div>
                         </div>

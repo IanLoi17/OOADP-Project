@@ -18,58 +18,126 @@ router.get('/listRecords', ensureAuthenticated, (req, res) => {
 
         raw: true
     })
-    .then((records) => {
-        res.render('medicalrecords/listRecords', {
-            records: records
-        });
-    })
-    .catch(err => console.log(err));
+        .then((records) => {
+            let { name, age, height, weight, bloodtype, dateofbirth, drugallergy, majorillness } = req.user;
+
+            res.render('medicalrecords/listRecords', {
+                records: records,
+                name: name,
+                age: age,
+                height: height,
+                weight: weight,
+                bloodtype: bloodtype
+            });
+        })
+        .catch(err => console.log(err));
 });
 
 router.get('/addRecords', ensureAuthenticated, (req, res) => {
-    res.render('./medicalrecords/enterRecords');
+    let { name, age, height, weight, bloodtype, dateofbirth, drugallergy, majorillness } = req.user;
+
+    res.render('./medicalrecords/enterRecords', {
+        name: name,
+        age: age,
+        height: height,
+        weight: weight,
+        bloodtype: bloodtype
+    });
 });
 
 
 // Display medical records for the current patient
 router.get('/showRecords', ensureAuthenticated, (req, res) => {
-    let name = 'John Tan';
-    let age = 19;
-    let height = '1.72';
-    let weight = '58.7';
-    let gender = 'M';
-    let bloodtype = 'O';
-    let dateofbirth = '12/06/2000';
-    let drugallergy = 'Sofidroux antibiotic';
-    let majorillness = 'None';
+    let { name, gender, patientID, nric, age, height, weight, bloodtype, dateofbirth, drugallergy, majorillness } = req.user;
 
-    res.render('./medicalrecords/displayRecords', {
-        name: name,
-        age: age,
-        height: height,
-        weight: weight,
-        gender: gender,
-        bloodtype: bloodtype,
-        dateofbirth: dateofbirth,
-        drugallergy: drugallergy,
-        majorillness: majorillness
+    Records.findOne({
+        where: {
+            userId: req.user.id
+        }
+    }).then((records) => {
+        if (drugallergy == '' && majorillness == '') {
+            res.render('./medicalrecords/showRecords', {
+                records: records,
+                name: name,
+                patientID: patientID,
+                gender: gender,
+                nric: nric,
+                age: age,
+                height: height,
+                weight: weight,
+                bloodtype: bloodtype,
+                dateofbirth: dateofbirth,                    
+                drugallergy: drugallergy = 'None',
+                majorillness: majorillness = 'None'
+            });
+        }
+
+        else if (drugallergy != '' && majorillness == '') {
+            res.render('./medicalrecords/showRecords', {
+                records: records,
+                name: name,
+                patientID: patientID,
+                gender: gender,
+                nric: nric,
+                age: age,
+                height: height,
+                weight: weight,
+                bloodtype: bloodtype,
+                dateofbirth: dateofbirth,
+                drugallergy: drugallergy,
+                majorillness: majorillness = 'None'
+            });
+        }
+
+        else if (drugallergy == '' && majorillness != '') {
+            res.render('./medicalrecords/showRecords', {
+                records: records,
+                name: name,
+                patientID: patientID,
+                gender: gender,
+                nric: nric,
+                age: age,
+                height: height,
+                weight: weight,
+                bloodtype: bloodtype,
+                dateofbirth: dateofbirth,
+                drugallergy: drugallergy = 'None',
+                majorillness: majorillness
+            });
+        }
+
+        else {
+            res.render('./medicalrecords/showRecords', {
+                records: records,
+                name: name,
+                patientID: patientID,
+                gender: gender,
+                nric: nric,
+                age: age,
+                height: height,
+                weight: weight,
+                bloodtype: bloodtype,
+                dateofbirth: dateofbirth,
+                drugallergy: drugallergy,
+                majorillness: majorillness
+            });
+        }
     });
 });
 
 router.post('/addRecords', (req, res) => {
-    let medicalrecords = req.body.medicalrecords;
-    let information = req.body.information;
+    let { medicalrecords, information } = req.body;
     let userId = req.user.id
 
     Records.create({
         records: medicalrecords,
         information,
         userId
-    }) .then((record) => {
+    }).then((record) => {
         alertMessage(res, 'success', 'Medical Records added successfully', 'fa fa-check-circle', true);
         res.redirect('/records/listRecords');
     })
-    .catch(err => console.log(err));
+        .catch(err => console.log(err));
 });
 
 
