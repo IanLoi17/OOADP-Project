@@ -8,6 +8,10 @@ const Records = db.define('medicalrecords', {
 
     information: {
         type: Sequelize.STRING
+    },
+    
+    patientId: {
+        type: Sequelize.STRING
     }
 });
 

@@ -14,6 +14,10 @@ const User = db.define('users',{
         type: Sequelize.STRING
     },
 
+    salutation: {
+        type: Sequelize.STRING
+    },
+
     nric: {
         type: Sequelize.STRING
     },

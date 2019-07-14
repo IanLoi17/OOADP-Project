@@ -1,14 +1,11 @@
 <link rel="stylesheet" type="text/css" href="/css/logReg.css">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script>
     $(function() {
-        $('.datepicker').datepicker({
-            format: 'dd/mm/yyyy',
-            value: new Date().toLocaleDateString('en-AUS'),
-            uiLibrary: 'bootstrap4',
+        $('#datepicker').datepicker({
+            dateFormat: 'dd/mm/yy'
         });
     });
     
@@ -165,17 +162,20 @@
                                         is required</div>
                                 </div>
 
-                                <div class="form-group" data-provide="datepicker">
+                                <div class="form-group">
 
                                     {{!-- <input id="datepicker" type="text" class="form-control" name="dateofbirth"
                                         placeholder="Date of birth *" required /> --}}
                                     
                                     {{!-- <input class="datepicker form-control" placeholder="Date of birth *" name="dateofbirth" data-date-format="mm/dd/yyyy" required /> --}}
 
-                                    <input type="text" class="form-control datepicker" name="dateofbirth" value="{{formatDate dateofbirth 'MM/DD/YYYY'}}" placeholder="Date of birth(MM/DD/YYYY) *" autocomplete="off" required />
+                                    <input type="text" id="datepicker" class="form-control" name="dateofbirth" value="{{formatDate dateofbirth 'DD/MM/YYYY'}}" placeholder="Date of birth(MM/DD/YYYY) *" autocomplete="off" required />
 
-                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid date of birth
-                                    </div>
+                                    {{!-- <input type="text" class="form-control" id="datepicker" data-type="datepicker" placeholder="Date of birth *" required /> --}}
+
+                                    {{!-- <input type="text" id="datepicker" class="form-control" /> --}}
+
+                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid date of birth</div>
                                     <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Invalid date
                                         of birth</div>
                                 </div>
@@ -213,8 +213,16 @@
 
                                 <div class="form-group">
 
-                                    <input type="text" class="form-control" placeholder="Blood type *" value="{{bloodtype}}" name="bloodtype" autocomplete="off"
-                                        required />
+                                    {{!-- <input type="text" class="form-control" placeholder="Blood type *" value="{{bloodtype}}" name="bloodtype" autocomplete="off"
+                                        required /> --}}
+
+                                    <select class="form-control" name="bloodtype" value="{{bloodtype}}" required>
+                                        <option style="display:none" disabled selected value>--- Select your blood type ---</option>
+                                        <option value="O">O</option>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="AB">AB</option>
+                                    </select>
 
                                     <div class="valid-feedback"><i class="fa fa-check-circle"></i> Valid blood type
                                     </div>

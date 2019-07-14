@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const alertMessage = require('../helpers/messenger');
-const upload = require('../helpers/imageUpload');
 const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
@@ -12,9 +11,10 @@ router.post('/register', (req, res) => {
     let errors = [];
 
     // Retrieves fields from register page
-    let {name, occupation, nric, gender, mobileNo, housephoneNo, email, age, bloodtype, weight, height, password, password2, drugallergy, majorillness} = req.body;
+    let {name, occupation, mobileNo, housephoneNo, nric, gender, email, age, bloodtype, weight, height, password, password2, drugallergy, majorillness} = req.body;
     let dateofbirth = moment(req.body.dateofbirth, 'DD/MM/YYYY');
     let patientID = req.body.nric;
+    let salutation = "";
 
     if (req.body.password !== req.body.password2) {
         errors.push({ text: 'Passwords do not match!' });
@@ -87,6 +87,7 @@ router.post('/register', (req, res) => {
                                 patientID: patientID,
                                 nric,
                                 gender,
+                                salutation: salutation="P",
                                 mobileNo,
                                 housephoneNo,
                                 dateofbirth,
@@ -111,6 +112,8 @@ router.post('/register', (req, res) => {
                                 occupation,
                                 nric,
                                 gender,
+                                patientID: patientID,
+                                salutation: salutation="D",
                                 mobileNo,
                                 housephoneNo,
                                 dateofbirth,
@@ -135,6 +138,7 @@ router.post('/register', (req, res) => {
     }
 });
 
+
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/',                   // Route to /records/listRecords URL
@@ -146,16 +150,6 @@ router.post('/login', (req, res, next) => {
         When a failure occur passport passes the message object as error 
         */
     })(req, res, next);
-});
-
-router.get('/profile', (req, res) => {
-    let name = req.user.name;
-    let email = req.user.email;
-
-    res.render('user/profile', {
-        name: name,
-        email: email
-    });
 });
 
 module.exports = router;

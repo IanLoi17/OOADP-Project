@@ -1,7 +1,7 @@
 {
   "name": "ooadp-project-master",
   "version": "1.0.0",
-  "description": "Smart medical records retrieve",
+  "description": "Smartcare medical records retrieve",
   "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",

@@ -18,7 +18,7 @@
                                 <legend class="font-weight-bold"><i class="fas fa-user"></i> Personal Particulars
                                 </legend>
                             </div>
-
+                            
                             <div class="col-sm-12 col-md-12 col-lg-12" style="margin-left:3px;">
                                 <h3 class="font-weight-bold">Patient ID No:
                                     <span class="text-info">{{patientID}}</span>
@@ -51,12 +51,22 @@
 
                             <div class="col-sm-12 col-md-12 col-lg-3">
                                 <p class="font-italic">Date of birth:</p>
-                                <p class="text-info font-weight-bold">{{formatDate dateofbirth 'DD/MM/YYYY'}}</p>
+                                <p class="text-info font-weight-bold">{{formatDate dateofbirth 'DD MMMM YYYY'}}</p>
                             </div>
 
                             <div class="col-sm-12 col-md-12 col-lg-3">
                                 <p class="font-italic">Height(m):</p>
                                 <p class="text-info font-weight-bold">{{height}}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">Mobile phone no:</p>
+                                <p class="text-info font-weight-bold">{{mobileNo}}</p>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-3">
+                                <p class="font-italic">House phone no:</p>
+                                <p class="text-info font-weight-bold">{{housephoneNo}}</p>
                             </div>
 
                             <div class="col-sm-12 col-md-12 col-lg-3">
@@ -93,17 +103,26 @@
                     </button>
                 </div>
 
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
-                    <div class="card-body">
-                        <h3 class="font-weight-bold font-italic">Your Medical Record(s):</h3>
-                        <p class="font-weight-bold" name="medicalrecords">{{medicalrecords}}</p>
-                        
-                        <br>
+                {{#if records}}
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold font-italic">Your Medical Record(s):</h3>
+                            <p class="text-primary font-weight-bold" name="medicalrecords">{{records.records}}</p>
+                            
+                            <br>
 
-                        <h3 class="font-weight-bold font-italic">Important information(s):</h3>
-                        <p class="font-weight-bold" name="information">{{information}}</p>
+                            <h3 class="font-weight-bold font-italic">Important information(s):</h3>
+                            <p class="text-primary font-weight-bold" name="information">{{records.information}}</p>
+                        </div>
                     </div>
-                </div>
+
+                {{else}}
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
+                        <div class="card-body">
+                            <h3 class="font-weight-bold">You have no Medical Records Yet!</h3>
+                        </div>
+                    </div>
+                {{/if}}
             </div>
         </div>
     </div>

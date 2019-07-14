@@ -18,3 +18,11 @@ fieldset {
     border-radius: 10px;
     background-color: white;
 }
+
+#recordsCollapse:hover {
+    text-decoration: none;
+}
+
+#recordsCollapse {
+    text-decoration: none;
+}

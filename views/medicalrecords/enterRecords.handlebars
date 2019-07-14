@@ -24,53 +24,61 @@
         <div class="card card-body">
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="input-group">
-                        {{!-- <input type="text" name="patientid" class="form-control"
-                            placeholder="Enter the patient ID to retrieve the particulars of that user *" /> --}}
-                        
-                        <input type="text" name="patientid" class="form-control" placeholder="Enter the patient ID to retrieve the particulars of the patient *" />
-                        <span class="input-group-btn">
-                            <a href="#" class="btn btn-info" role="button">Find <i class="fa fa-search"></i></a>
-                        </span>
-                    </div>
-                </div>
-            </div>
-
-            <br>
-
-            <div class="row">
-                <div class="col-sm-12">
                     <fieldset>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <legend class="font-weight-bold"><i class="fas fa-user"></i> Patient's Particulars</legend>
+                                <legend class="font-weight-bold"><i class="fas fa-user"></i> ALL Patient's Particulars
+                                </legend>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Name:</p>
-                                <p class="text-info font-weight-bold">{{name}}</p>
+                            <div class="card-header col-sm-12 col-md-12 col-lg-12">
+                                <h3 class="font-italic">Patient ID/NRIC: <span class="text-info font-weight-bold" name="patientid">{{user.patientID}}</span></h3>
                             </div>
+                        </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Age:</p>
-                                <p class="text-info font-weight-bold">{{age}}</p>
-                            </div>
+                        <div class="card card-body border border-primary">
+                            <div class="row">
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Name:</p>
+                                    <p class="text-info font-weight-bold">{{user.name}}</p>
+                                </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Height:</p>
-                                <p class="text-info font-weight-bold">{{height}}</p>
-                            </div>
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Gender:</p>
+                                    <p class="text-info font-weight-bold">{{user.gender}}</p>
+                                </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Weight:</p>
-                                <p class="text-info font-weight-bold">{{weight}}</p>
-                            </div>
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Age:</p>
+                                    <p id="age" class="text-info font-weight-bold">{{user.age}}</p>
+                                </div>
 
-                            <div class="col-sm-12 col-md-12 col-lg-3">
-                                <p class="font-italic">Blood type:</p>
-                                <p class="text-info font-weight-bold">{{bloodtype}}</p>
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Height(m):</p>
+                                    <p class="text-info font-weight-bold">{{user.height}}</p>
+                                </div>
+
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Weight(kg):</p>
+                                    <p class="text-info font-weight-bold">{{user.weight}}</p>
+                                </div>
+
+                                {{!-- <div class="col-sm-12 col-md-12 col-lg-3">
+                                            <p class="font-italic">Patient ID/NRIC:</p>
+                                            <p class="text-info font-weight-bold">{{patientID}}</p>
+                                        </div> --}}
+
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Date of birth:</p>
+                                    <p class="text-info font-weight-bold">{{formatDate user.dateofbirth 'DD MMMM YYYY'}}</p>
+                                </div>
+
+                                <div class="col-sm-4 col-md-4 col-lg-3">
+                                    <p class="font-italic">Blood type:</p>
+                                    <p class="text-info font-weight-bold">{{user.bloodtype}}</p>
+                                </div>
                             </div>
                         </div>
                     </fieldset>
@@ -87,37 +95,61 @@
                     <fieldset>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <legend class="font-weight-bold">Patient's Medical Records</legend>
+                                <legend class="font-weight-bold"><i class="fa fa-pencil-square-o"></i> Patient's Medical
+                                    Records</legend>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label id="title" class="font-weight-bold" for="medicalrecords"><i
-                                            class="fas fa-book-medical"></i> Medical Record(Required):</label>
-                                    <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="medicalrecords"
-                                        name="medicalrecords" rows="8" cols="160" placeholder="Eg. "
-                                        required></textarea>
-                                        
-                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Medical records are
-                                        valid</div>
-                                    <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please enter
-                                        medical records of patient</div>
+                        <div class="card card-body border-primary">
+                            {{!-- <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label id="title" class="font-weight-bold" for="patientid"><i
+                                                class="fa fa-search"></i> Enter the Patient ID no. you are going to
+                                            enter Medical Records for(Required):</label>
+                                        <input type="text" name="patientid" class="form-control"
+                                            placeholder="Enter patient ID to retrieve the particulars of that patient *"
+                                            required />
+
+                                        <div class="valid-feedback"><i class="fa fa-check-circle"></i> Patient ID number
+                                            is valid</div>
+                                        <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please
+                                            enter a patient ID number
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label id="title" class="font-weight-bold" for="medicalrecords"><i
+                                                class="fas fa-book-medical"></i> Medical Record(Required):</label>
+                                        <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="medicalrecords"
+                                            name="medicalrecords" rows="8" cols="160" placeholder="Eg. "
+                                            required></textarea>
+
+                                        <div class="valid-feedback"><i class="fa fa-check-circle"></i> Medical records
+                                            are
+                                            valid</div>
+                                        <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please
+                                            enter
+                                            medical records of patient</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <br>
+                            <br>
 
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label id="title" class="font-weight-bold" for="information"><i
-                                            class="fa fa-info-circle"></i> Other information(Optional):</label>
-                                    <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="information"
-                                        name="information" rows="7" cols="160" placeholder="Eg."></textarea>
-                                    <div class="valid-feedback"><i class="fa fa-check-circle"></i> Optional to enter
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label id="title" class="font-weight-bold" for="information"><i
+                                                class="fa fa-info-circle"></i> Other information(Optional):</label>
+                                        <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="information"
+                                            name="information" rows="7" cols="160" placeholder="Eg."></textarea>
+                                        <div class="valid-feedback"><i class="fa fa-check-circle"></i> Optional to enter
+                                        </div>
                                     </div>
                                 </div>
                             </div>

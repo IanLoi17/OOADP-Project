@@ -7,55 +7,50 @@
             <div class="card-border border border-primary mb-2 w-100 mx-auto" style="border-radius:5px;">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Name:</p>
-                            <p class="text-info">{{name}}</p>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Name: <span class="text-info">{{name}}</span></p>
                         </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Gender:</p>
-                            <p class="text-info"></p>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Patient ID: <span class="text-info">{{patientId}}</span></p>
                         </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">NRIC no:</p>
-                            <p class="text-info"></p>
+                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Gender: <span class="text-info"></span></p>
+                        </div> --}}
+
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">NRIC no: <span class="text-info">{{nric}}</span></p>
                         </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Age:</p>
-                            <p class="text-info">{{age}}</p>
+                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Age: <span class="text-info"></span></p>
+                        </div> --}}
+
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Date of birth: <span class="text-info">{{dateofbirth}}</span></p>
                         </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Date of birth:</p>
-                            <p class="text-info"></p>
-                        </div>
+                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Height(m): <span class="text-info"></span></p>
+                        </div> --}}
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Height(m):</p>
-                            <p class="text-info">{{height}}</p>
-                        </div>
+                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Weight(kg): <span class="text-info"></span></p>
+                        </div> --}}
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Weight(kg):</p>
-                            <p class="text-info">{{weight}}</p>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <p class="font-italic">Blood type: <span class="text-info">{{bloodtype}}</span></p>
                         </div>
-
-                        <div class="col-sm-12 col-md-12 col-lg-3">
-                            <p class="font-italic">Blood type:</p>
-                            <p class="text-info">{{bloodtype}}</p>
-                        </div>
-
                         
 
-                        <div class="col-sm-12 col-md-12 col-lg-3">
+                        <div class="col-sm-12 col-md-12 col-lg-4">
                             <div class="btn-group">
                                 <a href="#" role="button" class="btn btn-secondary btn-sm">
                                     <i class="fas fa-pencil-alt"></i> Edit
                                 </a>
 
-                                <a href="#" role="button" class="btn btn-danger btn-sm">
+                                <a href="/records/delete/{{id}}" role="button" data-toggle="confirmation" data-title="Confirm delete?" class="btn btn-danger btn-sm">
                                     <i class="fas fa-trash-alt"></i> Delete
                                 </a>
                             </div>
@@ -89,5 +84,5 @@
 </div>
 
 {{else}}
-    <h3 class="text-dark font-weight-bold">No medical records for this patient</h3>
+    <h3 class="text-dark font-weight-bold">No medical records recorded yet</h3>
 {{/if}}
