@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="body">
+        <div class="card-body">
+            <h1 class="font-weight-bold text-dark">Retrieve Patient's Particulars by Patient ID</h1>
+        </div>
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <form action="/records/findPatient" method="post" class="was-validated">
+                        <div class="input-group">
+                            {{!-- <input type="text" name="patientid" class="form-control" placeholder="Enter patient ID to retrieve the particulars of that patient *" required /> --}}
+                            <select name="patientid" class="form-control" id="patientid" required>
+                                <option disabled selected value>--- Select one of the Patient ID to retrieve the particulars of that patient ---</option>
+                                {{#if user}}
+                                    {{#each user}}
+                                        <option value="{{patientID}}">{{patientID}}</option>
+                                    {{/each}}
+                                {{/if}}
+                            </select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="submit" >Find <i class="fa fa-search"></i></a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var patientid = document.getElementById('patientid').value;
+</script>

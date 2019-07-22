@@ -14,7 +14,6 @@ router.post('/register', (req, res) => {
     let {name, occupation, mobileNo, housephoneNo, nric, gender, email, age, bloodtype, weight, height, password, password2, drugallergy, majorillness} = req.body;
     let dateofbirth = moment(req.body.dateofbirth, 'DD/MM/YYYY');
     let patientID = req.body.nric;
-    let salutation = "";
 
     if (req.body.password !== req.body.password2) {
         errors.push({ text: 'Passwords do not match!' });
@@ -81,55 +80,215 @@ router.post('/register', (req, res) => {
                         password = bcrypt.hashSync(password, salt);
                         
                         if (occupation == 'Patient') {
-                            User.create({
-                                name,
-                                occupation,
-                                patientID: patientID,
-                                nric,
-                                gender,
-                                salutation: salutation="P",
-                                mobileNo,
-                                housephoneNo,
-                                dateofbirth,
-                                email,
-                                age,
-                                bloodtype,
-                                weight,
-                                height,
-                                drugallergy,
-                                majorillness,
-                                password
-                            }).then(user => {
-                                alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
-                                res.redirect('/displaylogin');
-                            })
-                            .catch(err => console.log(err));
+                            if (drugallergy == '' && majorillness == '') {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="P",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy: drugallergy='None',
+                                    majorillness: majorillness='None',
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
+                            
+                            else if (drugallergy != '' && majorillness == '') {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="P",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy,
+                                    majorillness: majorillness='None',
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
+
+                            else if (drugallergy == '' && majorillness != '') {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="P",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy: drugallergy='None',
+                                    majorillness,
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
+
+                            else {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="P",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy,
+                                    majorillness,
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
                         }
 
                         else {
-                            User.create({
-                                name,
-                                occupation,
-                                nric,
-                                gender,
-                                patientID: patientID,
-                                salutation: salutation="D",
-                                mobileNo,
-                                housephoneNo,
-                                dateofbirth,
-                                email,
-                                age,
-                                bloodtype,
-                                weight,
-                                height,
-                                drugallergy,
-                                majorillness,
-                                password
-                            }).then(user => {
-                                alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
-                                res.redirect('/displaylogin');
-                            })
-                            .catch(err => console.log(err));
+                            if (drugallergy == '' && majorillness == '') {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="D",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy: drugallergy='None',
+                                    majorillness: majorillness='None',
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
+                            
+                            else if (drugallergy != '' && majorillness == '') {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="D",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy,
+                                    majorillness: majorillness='None',
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
+
+                            else if (drugallergy == '' && majorillness != '') {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="D",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy: drugallergy='None',
+                                    majorillness,
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
+
+                            else {
+                                User.create({
+                                    name,
+                                    occupation,
+                                    patientID: patientID,
+                                    nric,
+                                    gender,
+                                    salutation: salutation="D",
+                                    mobileNo,
+                                    housephoneNo,
+                                    dateofbirth,
+                                    email,
+                                    age,
+                                    bloodtype,
+                                    weight,
+                                    height,
+                                    drugallergy,
+                                    majorillness,
+                                    password
+                                }).then(user => {
+                                    alertMessage(res, 'success', user.name + ' added. Please login', 'fas fa-sign-in-alt', true);
+                                    res.redirect('/displaylogin');
+                                })
+                                .catch(err => console.log(err));
+                            }
                         }
                     })
                 })

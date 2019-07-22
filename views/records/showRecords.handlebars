@@ -1,0 +1,145 @@
+<link rel="stylesheet" type="text/css" href="/css/displayRecords.css">
+<div class="container col-sm-12 col-md-12 col-lg-12">
+    <div>
+        <div class="card-body">
+            <h1 class="font-weight-bold text-dark">Personal Medical Records</h1>
+        </div>
+
+        <div class="card card-body">
+            <div class="row">
+                {{!-- <div class="col-sm-2 col-md-2 col-lg-2" style="margin-bottom:14px;">
+                    <img id="profilepic" src="/image/profilephoto.png">
+                </div> --}}
+
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <legend class="font-weight-bold"><i class="fas fa-user"></i> Personal Particulars
+                                </legend>
+                            </div>
+
+                            <div class="col-sm-12 col-md-12 col-lg-12" style="margin-left:3px;">
+                                <h3 class="font-weight-bold">Patient ID No:
+                                    <span class="text-info">{{patientID}}</span>
+                                </h3>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Name:</p>
+                                <p class="text-info font-weight-bold">{{name}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Gender:</p>
+                                <p class="text-info font-weight-bold">{{gender}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">NRIC no:</p>
+                                <p class="text-info font-weight-bold">{{nric}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Age:</p>
+                                <p class="text-info font-weight-bold">{{age}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Date of birth:</p>
+                                <p class="text-info font-weight-bold">{{formatDate dateofbirth 'DD MMMM YYYY'}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Height(m):</p>
+                                <p class="text-info font-weight-bold">{{height}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Mobile phone no:</p>
+                                <p class="text-info font-weight-bold">{{mobileNo}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">House phone no:</p>
+                                <p class="text-info font-weight-bold">{{housephoneNo}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Weight(kg):</p>
+                                <p class="text-info font-weight-bold">{{weight}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Blood type:</p>
+                                <p class="text-info font-weight-bold">{{bloodtype}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Drug allergy:</p>
+                                <p class="text-info font-weight-bold">{{replaceCommas drugallergy}}</p>
+                            </div>
+
+                            <div class="col-sm-3 col-md-4 col-lg-3">
+                                <p class="font-italic">Major illness:</p>
+                                <p class="text-info font-weight-bold">{{replaceCommas majorillness}}</p>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <div class="accordion" id="recordsAccordion">
+                <div class="header" id="headingOne">
+                    <button id="recordsCollapse" class="btn btn-link font-weight-bold" type="button"
+                        data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+                        aria-controls="collapseOne">
+                        Your Medical Records <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+
+                {{#if records}}
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold font-italic">Your Medical Record(s):</h3>
+                        <p class="text-primary font-weight-bold" name="medicalrecords">{{records.records}}</p>
+
+                        <br>
+
+                        <h3 class="font-weight-bold font-italic">Important information(s):</h3>
+                        <p class="text-primary font-weight-bold" name="information">{{records.information}}</p>
+                        
+                        <p class="text-dark">Updated on: {{formatDate records.dateposted 'DD MMMM YYYY'}}</p>
+
+                        {{!-- <h3 class="font-weight-bold font-italic">Your Medical Record(s):</h3>
+                        <p class="text-primary font-weight-bold" name="medicalrecords">{{records.records}}</p>
+
+                        <br>
+
+                        <h3 class="font-weight-bold font-italic">Important information(s):</h3>
+                        <p class="text-primary font-weight-bold" name="information">{{records.information}}</p> --}}
+                    </div>
+                </div>
+
+                {{else}}
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
+                    <div class="card-body">
+                        <h3 class="font-weight-bold">You have no Medical Records Yet!</h3>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function home() {
+        window.location.replace('/');
+    }
+</script>

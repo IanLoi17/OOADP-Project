@@ -4,32 +4,66 @@ const alertMessage = require('../helpers/messenger');
 const ensureAuthenticated = require('../helpers/auth');
 const Records = require('../models/Records');
 const User = require('../models/User');
+const moment = require('moment');
 
 
+// Render medical records list
 router.get('/listRecords', ensureAuthenticated, (req, res) => {
-    Records.findAll({
-        order: [
-            ['records', 'ASC']
-        ],
+    if (req.user.salutation == 'D') {
+        Records.findAll({
+            order: [
+                ['records', 'ASC']
+            ],
 
-        raw: true
-    }).then((records) => {
-        res.render('./medicalrecords/listRecords', {
-            records: records,
-        });
-    }).catch(err => console.log(err));
+            raw: true
+        }).then((records) => {
+            // User.findOne({
+            //     where: {
+            //         patientID: 'T0117430J'
+            //     }
+            // }).then((user) => {
+            //     res.render('./medicalrecords/listRecords', {
+            //         records: records,
+            //     });
+            // })
+
+            res.render('./records/listRecords', {
+                records: records,
+            });
+        }).catch(err => console.log(err));
+    }
+
+    else {
+        alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
+        res.redirect('/');
+    }
 });
 
 
 // Render find patient handlebars
 router.get('/findPatient', ensureAuthenticated, (req, res) => {
-    res.render('./medicalrecords/findPatient');
+    if (req.user.salutation == 'D') {
+        User.findAll({
+            where: {
+                salutation: 'P'
+            }
+        }).then((user) => {
+            res.render('./records/findPatient', {
+                user: user
+            });
+        }).catch(err => console.log(err));
+    }
+
+    else {
+        alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
+        res.redirect('/');
+    }
 });
 
 
 
 router.post('/findPatient', (req, res) => {
-    let patientid = req.body.patientid; 
+    let patientid = req.body.patientid;
 
     User.findOne({
         where: {
@@ -40,7 +74,8 @@ router.post('/findPatient', (req, res) => {
             // res.render('medicalrecords/enterRecords', {
             //     user: user
             // });
-            
+
+            alertMessage(res, 'success', 'Patient ' + user.name + ' with patient ID "' + patientid + '" has been found!', 'fa fa-check-circle', true);
             res.redirect('/records/addRecords');
         }
 
@@ -80,12 +115,28 @@ router.post('/findPatient', (req, res) => {
 //         }
 
 //     }).catch((err) => console.log(err));
-// })
+// });
 
 
 // Render the add medical records page
 router.get('/addRecords', ensureAuthenticated, (req, res) => {
-    res.render('./medicalrecords/enterRecords');
+    if (req.user.salutation == 'D') {
+        User.findOne({
+            where: {
+                patientID: 'T0117430J'
+            }
+        }).then((user) => {
+            res.render('./records/enterRecords', {
+                user: user
+            });
+        }).then(err => console.log(err));
+    }
+
+
+    else {
+        alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
+        res.redirect('/');
+    }
 });
 
 
@@ -127,114 +178,83 @@ router.get('/showRecords', ensureAuthenticated, (req, res) => {
 
     Records.findOne({
         where: {
-            userId: req.user.id
+            patientID: req.user.patientID
         }
     }).then((records) => {
-        if (drugallergy == '' && majorillness == '') {
-            res.render('./medicalrecords/showRecords', {
-                records,
-                name,
-                patientID,
-                gender,
-                nric,
-                mobileNo,
-                housephoneNo,
-                age,
-                height,
-                weight,
-                bloodtype,
-                dateofbirth,                    
-                drugallergy: drugallergy = 'None',
-                majorillness: majorillness = 'None'
-            });
-        }
-
-        else if (drugallergy != '' && majorillness == '') {
-            res.render('./medicalrecords/showRecords', {
-                records,
-                name,
-                patientID,
-                gender,
-                nric,
-                mobileNo,
-                housephoneNo,
-                age,
-                height,
-                weight,
-                bloodtype,
-                dateofbirth,
-                drugallergy,
-                majorillness: majorillness = 'None'
-            });
-        }
-
-        else if (drugallergy == '' && majorillness != '') {
-            res.render('./medicalrecords/showRecords', {
-                records,
-                name,
-                patientID,
-                gender,
-                nric,
-                mobileNo,
-                housephoneNo,
-                age,
-                height,
-                weight,
-                bloodtype,
-                dateofbirth,
-                drugallergy: drugallergy = 'None',
-                majorillness
-            });
-        }
-
-        else {
-            res.render('./medicalrecords/showRecords', {
-                records,
-                name,
-                patientID,
-                gender,
-                nric,
-                mobileNo,
-                housephoneNo,
-                age,
-                height,
-                weight,
-                bloodtype,
-                dateofbirth,
-                drugallergy,
-                majorillness
-            });
-        }
+        res.render('./records/showRecords', {
+            records,
+            name,
+            patientID,
+            gender,
+            nric,
+            mobileNo,
+            housephoneNo,
+            age,
+            height,
+            weight,
+            bloodtype,
+            dateofbirth,
+            drugallergy,
+            majorillness
+        });
     });
 });
 
 router.post('/addRecords', (req, res) => {
-    let { medicalrecords, information } = req.body;
+    let { patientID, medicalrecords, information } = req.body;
     let userId = req.user.id;
+    var d = new Date();
+    let dateposted = d.toLocaleDateString();
 
 
     if (information != '') {
-        Records.create({
-            records: medicalrecords,
-            information,
-            userId
-        }).then(() => {
-            alertMessage(res, 'success', 'Medical Records added successfully', 'fa fa-check-circle', true);
-            res.redirect('/records/listRecords');
-        })
-            .catch(err => console.log(err));
+        Records.findOne({where: 
+            {patientID: req.body.patientID}
+        }).then((records) => {
+            if (records) {
+                alertMessage(res, 'danger', 'Patient with the ID "' + patientID + '" already has Medical Records', 'fa fa-info-circle', true);
+                res.redirect('/records/addRecords');
+            }
+
+            else {
+                Records.create({
+                    records: medicalrecords,
+                    information,
+                    patientID: patientID,
+                    userId,
+                    dateposted: dateposted
+                }).then(() => {
+                    alertMessage(res, 'success', 'Medical Records added successfully', 'fa fa-check-circle', true);
+                    res.redirect('/records/listRecords');
+                })
+                    .catch(err => console.log(err));
+            }
+        }).catch(err => console.log(err));
     }
-    
+
     else {
-        Records.create({
-            records: medicalrecords,
-            information: information = 'None',
-            userId
-        }).then(() => {
-            alertMessage(res, 'success', 'Medical Records added successfully', 'fa fa-check-circle', true);
-            res.redirect('/records/listRecords');
-        })
-            .catch(err => console.log(err));
+        Records.findOne({where: 
+            {patientID: req.body.patientID}
+        }).then((records) => {
+            if (records) {
+                alertMessage(res, 'danger', 'Patient with the ID "' + patientID + '" already has Medical Records', 'fa fa-info-circle', true);
+                res.redirect('/records/addRecords');
+            }
+            
+            else {
+                Records.create({
+                    records: medicalrecords,
+                    information: information = 'None',
+                    patientID: patientID,
+                    userId,
+                    dateposted: dateposted
+                }).then(() => {
+                    alertMessage(res, 'success', 'Medical Records added successfully', 'fa fa-check-circle', true);
+                    res.redirect('/records/listRecords');
+                })
+                    .catch(err => console.log(err));
+            }
+        }).catch(err => console.log(err));
     }
 });
 

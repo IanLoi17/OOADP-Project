@@ -24,6 +24,7 @@ const recordsRoute = require('./routes/records');
 
 // Bring in handlebars helpers
 const {formatDate} = require('./helpers/hbs');
+const {replaceCommas} = require('./helpers/hbs');
 
 
 // Bring in database connection
@@ -57,6 +58,7 @@ const app = express();
 app.engine('handlebars', exphbs({
 	helpers: {
 		formatDate: formatDate,
+		replaceCommas: replaceCommas
 	},
 
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 

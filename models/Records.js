@@ -9,9 +9,13 @@ const Records = db.define('medicalrecords', {
     information: {
         type: Sequelize.STRING
     },
-    
-    patientId: {
+
+    patientID: {
         type: Sequelize.STRING
+    },
+
+    dateposted: {
+        type: Sequelize.DATE
     }
 });
 
