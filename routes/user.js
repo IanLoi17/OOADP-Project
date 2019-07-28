@@ -23,6 +23,14 @@ router.post('/register', (req, res) => {
         errors.push({ text: 'Password must be at least 8 characters!' });
     }
 
+    if (req.body.nric.length < 9) {
+        errors.push({ text: 'NRIC must contain 9 characters!'})
+    }
+
+    if (mobileNo.length < 8 || housephoneNo.length < 8) {
+        errors.push({text: 'Singapore phone numbers must contain only 8 characters'})
+    }
+
     if (errors.length > 0) {
         res.render('user/register', {
             errors,
@@ -42,7 +50,7 @@ router.post('/register', (req, res) => {
             majorillness,
             password,
             password2
-        })
+        });
     }
 
     else {
@@ -300,8 +308,8 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/',                   // Route to /records/listRecords URL
-        failureRedirect: '/displaylogin',       // Route to /login URL
+        successRedirect: '/records/consultationDetail',     // Route to /records/consultationDetail URL
+        failureRedirect: '/displaylogin',                   // Route to /login URL
         failureFlash: true
 
         /* Setting the failureFlash option to true instructs Passport to flash an error

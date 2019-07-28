@@ -21,7 +21,7 @@ html, body {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     border-radius: 5px;
-    width: 1900px;
+    /* width: 1900px; */
 
 }
 #cssmenu ul {
@@ -133,3 +133,9 @@ html, body {
 #profilephoto:hover {
     background-color: #133e40;
 }
+
+/* .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+} */

@@ -3,11 +3,11 @@ const db = require('../config/DBConfig');
 
 const Records = db.define('medicalrecords', {
     records: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(8000)
     },
 
     information: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(8000)
     },
 
     patientID: {
@@ -16,7 +16,7 @@ const Records = db.define('medicalrecords', {
 
     dateposted: {
         type: Sequelize.DATE
-    }
+    },
 });
 
 module.exports = Records;

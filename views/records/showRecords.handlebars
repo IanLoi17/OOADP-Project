@@ -51,7 +51,7 @@
 
                             <div class="col-sm-3 col-md-4 col-lg-3">
                                 <p class="font-italic">Date of birth:</p>
-                                <p class="text-info font-weight-bold">{{formatDate dateofbirth 'DD MMMM YYYY'}}</p>
+                                <p class="text-info font-weight-bold">{{formatDate dateofbirth 'DD MMM YYYY'}}</p>
                             </div>
 
                             <div class="col-sm-3 col-md-4 col-lg-3">
@@ -115,7 +115,7 @@
                         <h3 class="font-weight-bold font-italic">Important information(s):</h3>
                         <p class="text-primary font-weight-bold" name="information">{{records.information}}</p>
                         
-                        <p class="text-dark">Updated on: {{formatDate records.dateposted 'DD MMMM YYYY'}}</p>
+                        <p class="text-dark font-italic" style="font-family:'Source Sans Pro', sans-serif;">Updated on: {{formatDate records.dateposted 'DD MMMM YYYY'}}</p>
 
                         {{!-- <h3 class="font-weight-bold font-italic">Your Medical Record(s):</h3>
                         <p class="text-primary font-weight-bold" name="medicalrecords">{{records.records}}</p>

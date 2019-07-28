@@ -4,7 +4,7 @@ const alertMessage = require('../helpers/messenger');
 const ensureAuthenticated = require('../helpers/auth');
 const Records = require('../models/Records');
 const User = require('../models/User');
-const moment = require('moment');
+const Consultation = require('../models/Consultation');
 
 
 // Render medical records list
@@ -22,8 +22,9 @@ router.get('/listRecords', ensureAuthenticated, (req, res) => {
             //         patientID: 'T0117430J'
             //     }
             // }).then((user) => {
-            //     res.render('./medicalrecords/listRecords', {
+            //     res.render('./records/listRecords', {
             //         records: records,
+            //         user: user
             //     });
             // })
 
@@ -34,111 +35,90 @@ router.get('/listRecords', ensureAuthenticated, (req, res) => {
     }
 
     else {
-        alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
+        alertMessage(res, 'danger', 'Unauthorized access! Only Doctors can access the link', 'fas fa-exclamation-circle', true);
         res.redirect('/');
     }
 });
+
 
 
 // Render find patient handlebars
-router.get('/findPatient', ensureAuthenticated, (req, res) => {
-    if (req.user.salutation == 'D') {
-        User.findAll({
-            where: {
-                salutation: 'P'
-            }
-        }).then((user) => {
-            res.render('./records/findPatient', {
-                user: user
-            });
-        }).catch(err => console.log(err));
-    }
+// router.get('/findPatient', ensureAuthenticated, (req, res) => {
+//     if (req.user.salutation == 'D') {
+//         // User.findAll({
+//         //     where: {
+//         //         salutation: 'P'
+//         //     }
+//         // }).then((user) => {
+//         //     res.render('./records/findPatient', {
+//         //         user: user
+//         //     });
+//         // }).catch(err => console.log(err));
 
-    else {
-        alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
-        res.redirect('/');
-    }
-});
+//         // res.redirect('/records/addRecords');
+//         res.render('./records/enterRecords')
+//     }
 
-
-
-router.post('/findPatient', (req, res) => {
-    let patientid = req.body.patientid;
-
-    User.findOne({
-        where: {
-            patientID: patientid
-        }
-    }).then((user) => {
-        if (user) {
-            // res.render('medicalrecords/enterRecords', {
-            //     user: user
-            // });
-
-            alertMessage(res, 'success', 'Patient ' + user.name + ' with patient ID "' + patientid + '" has been found!', 'fa fa-check-circle', true);
-            res.redirect('/records/addRecords');
-        }
-
-        else {
-            alertMessage(res, 'danger', 'There is no patient found with the ID you entered!', 'fas fa-exclamation-circle', true);
-            res.redirect('/records/findPatient');
-        }
-    }).catch(err => console.log(err));
-});
+//     else {
+//         alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
+//         res.redirect('/');
+//     }
+// });
 
 
 
 // router.post('/findPatient', (req, res) => {
-//     User.findAll({
+//     let patientid = req.body.patientId;
+
+//     User.findOne({
 //         where: {
-//             salutation: 'P'
+//             patientID: patientid
 //         }
-//     })
-//     .then((user) => {
-//         let inputID = req.body.patientid;
+//     }).then((user) => {
+//         if (user) {
+//             // res.render('./records/enterRecords', {
+//             //     user: user
+//             // });
 
-//         var num = 0;
-//         if (user[num].patientID != inputID) {
-//             num += 1;
-//         }
+//             // console.log("here");
 
-//         if (user[num].patientID == inputID) {
-//             alertMessage(res, 'success', 'Patient with this ID "' + inputID + '" is found!', 'fa fa-check', true);
-//             res.render('medicalrecords/enterRecords', {
-//                 user: user
-//             });
+//             alertMessage(res, 'success', 'Patient ' + user.name + ' with patient ID "' + patientid + '" has been found!', 'fa fa-check-circle', true);
+//             res.redirect('/records/addRecords');
 //         }
 
 //         else {
-//             alertMessage(res, 'danger', 'Patient with this ID "' + inputID + '" is not found!', 'fas fa-exclamation-circle', true);
+//             alertMessage(res, 'danger', 'There is no patient found with the ID you entered!', 'fas fa-exclamation-circle', true);
 //             res.redirect('/records/findPatient');
 //         }
-
-//     }).catch((err) => console.log(err));
+//     }).catch(err => console.log(err));
 // });
+
 
 
 // Render the add medical records page
 router.get('/addRecords', ensureAuthenticated, (req, res) => {
     if (req.user.salutation == 'D') {
-        User.findOne({
+        User.findAll({
             where: {
-                patientID: 'T0117430J'
+                salutation: 'P'
             }
-        }).then((user) => {
-            res.render('./records/enterRecords', {
-                user: user
-            });
-        }).then(err => console.log(err));
+        }).then((users) => {
+            Consultation.findAll({})
+            .then((consultations) => {
+                res.render('./records/enterRecords', {
+                    users: users,
+                    consultations: consultations
+                }) 
+            }).catch(err => console.log(err))
+        }).catch(err => console.log(err));
     }
 
 
     else {
-        alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
+        alertMessage(res, 'danger', 'Unauthorized access! Only Doctors can access the link', 'fas fa-exclamation-circle', true);
         res.redirect('/');
     }
 });
-
 
 
 // Delete medical records for the patient
@@ -199,6 +179,127 @@ router.get('/showRecords', ensureAuthenticated, (req, res) => {
         });
     });
 });
+
+
+// Render update medical records page
+router.get('/updateRecords/:id', ensureAuthenticated, (req, res) => {
+    Records.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then((record) => {
+        User.findOne({
+            where: {
+                patientID: record.patientID
+            }
+        }).then((user) => {
+            if (!record) {
+                alertMessage(res, 'danger', 'No such medical records found!', 'fas fa-exclamation-circle', true);
+                res.redirect('/records/listRecords');
+            }
+    
+            else {
+                if (req.user.id === record.userId) {
+                    res.render('./records/updateRecords', {
+                        record: record,
+                        user: user
+                    })
+                }
+    
+                else {
+                    alertMessage(res, 'danger', 'Unauthorizeed access to medical records!', 'fas fa-exclamation-circle', true);
+                    res.redirect('/');
+                }
+            }
+        })
+    }).catch(err => console.log(err));
+});
+
+
+// Render enter consultation details handlebars
+router.get('/consultationDetail', ensureAuthenticated, (req, res) => {
+    User.findOne({
+        where: {
+            id: req.user.id
+        }
+    }).then((user) => {
+        res.render('./records/consultationDetail', {
+            user: user
+        });
+    }).catch(err => console.log(err));
+});
+
+
+
+router.post('/consultationDetail', (req, res) => {
+    let patientname = req.body.patientName;
+    let patientid = req.body.patientID;
+    let consultationdetail = req.body.consultationDetails;
+
+    Consultation.findOne({
+        where: {
+            patientID: patientid
+        }
+    }).then((consultation) => {
+        if (consultation) {
+            alertMessage(res, 'danger', 'You can only enter your consultation detail once per day', 'fa fa-info-circle', true);
+            res.redirect('/');
+        }
+
+        else {
+            Consultation.create({
+                patientName: patientname,
+                patientID: patientid,
+                consultation: consultationdetail
+            }).then(() => {
+                alertMessage(res, 'success', 'Consultation details has been added successfully', 'fa fa-check-circle', true);
+                res.redirect('/');
+            }).catch(err => console.log(err));
+        }
+    });
+});
+
+
+// Save updated medical records of patient
+router.put('/saveUpdatedRecords/:id', ensureAuthenticated, (req, res) => {
+    let {patientID, medicalrecords, information} = req.body;
+    let userId = req.user.id;
+    var d = new Date();
+    let dateposted = d.toLocaleDateString();
+
+    
+    if (information != '') {
+        Records.update({
+            records: medicalrecords,
+            information,
+            patientID: patientID,
+            userId,
+            dateposted: dateposted
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(() => {
+            alertMessage(res, 'success', 'Medical Records updated successfully', 'fa fa-check-circle', true);
+            res.redirect('/records/listRecords');
+        }).catch(err => console.log(err));
+    }
+
+    else {
+        Records.update({
+            records: medicalrecords,
+            information: information="None",
+            patientID: patientID,
+            userId,
+            dateposted: dateposted
+        }).then(() => {
+            alertMessage(res, 'success', 'Medical Records updated successfully', 'fa fa-check-circle', true);
+            res.redirect('/records/listRecords');
+        }).catch(err => console.log(err));
+    }
+});
+
+
 
 router.post('/addRecords', (req, res) => {
     let { patientID, medicalrecords, information } = req.body;

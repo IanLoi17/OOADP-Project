@@ -1,84 +1,104 @@
 <link rel="stylesheet" type="text/css" href="/css/listRecords.css">
 <div class="container">
-{{#if records}}
+    {{#if records}}
     <div class="card card-body">
         <h3 class="text-dark font-weight-bold">Medical Records List</h3>
         {{#each records}}
-            <div class="card-border border border-primary mb-2 w-100 mx-auto" style="border-radius:5px;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Name: <span class="text-info">{{user.name}}</span></p>
-                        </div>
+        <div class="card-border border border-primary mb-2 w-100 mx-auto" style="border-radius:5px;">
+            <div class="card-header col-sm-12 col-md-12 col-lg-12">
+                <h3 class="font-weight-bold">Patient ID/NRIC: <span class="text-info font-italic">{{patientID}}</span>
+                </h3>
+            </div>
 
-                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Gender: <span class="text-info"></span></p>
-                        </div> --}}
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-10">
+                        <div class="row">
+                            {{!-- <div class="col-sm-6 col-md-4 col-lg-3">
+                                <p class="font-italic">Name: <span class="text-info">{{user.name}}</span></p>
+                            </div>
 
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Patient ID/NRIC: <span class="text-info">{{patientID}}</span></p>
-                        </div>
+                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                <p class="font-italic">Gender: <span class="text-info">{{user.gender}}</span></p>
+                            </div> --}}
 
-                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Age: <span class="text-info"></span></p>
-                        </div> --}}
+                            {{!-- <div class="col-sm-6 col-md-4 col-lg-3">
+                                <p class="font-italic">Patient ID/NRIC: <span class="text-info">{{patientID}}</span></p>
+                            </div> --}}
 
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Date of birth: <span class="text-info">{{formatDate user.dateofbirth 'DD MMMM YYYY'}}</span></p>
-                        </div>
+                            {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                                <p class="font-italic">Age: <span class="text-info"></span></p>
+                            </div> --}}
 
-                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Height(m): <span class="text-info"></span></p>
-                        </div> --}}
+                            {{!-- <div class="col-sm-6 col-md-4 col-lg-3">
+                                <p class="font-italic">Date of birth: <span
+                                        class="text-info">{{formatDate user.dateofbirth 'DD MMMM YYYY'}}</span></p>
+                            </div> --}}
 
-                        {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Weight(kg): <span class="text-info"></span></p>
-                        </div> --}}
+                            {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                                <p class="font-italic">Height(m): <span class="text-info"></span></p>
+                            </div> --}}
 
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <p class="font-italic">Blood type: <span class="text-info">{{bloodtype}}</span></p>
-                        </div>
-                        
+                            {{!-- <div class="col-sm-12 col-md-12 col-lg-4">
+                                <p class="font-italic">Weight(kg): <span class="text-info"></span></p>
+                            </div> --}}
 
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="btn-group">
-                                <a href="#" role="button" class="btn btn-secondary btn-sm">
-                                    <i class="fas fa-pencil-alt"></i> Edit
-                                </a>
+                            {{!-- <div class="col-sm-6 col-md-4 col-lg-3">
+                                <p class="font-italic">Blood type: <span class="text-info">{{user.bloodtype}}</span></p>
+                            </div> --}}
 
-                                <a href="/records/delete/{{id}}" role="button" data-toggle="confirmation" data-title="Confirm delete?" class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash-alt"></i> Delete
-                                </a>
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <p class="font-italic">Medical Records:</p>
+                                <p class="text-primary font-weight-bold">{{records}}</p>
+                            </div>
+
+                            <div class="col-sm-6 col-md-6 col-lg-6">
+                                <p class="font-italic">Important Information:</p>
+                                <p class="text-primary font-weight-bold">{{information}}</p>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-12 col-md-8 col-lg-2">
+                        <div class="btn-group">
+                            <a href="/records/updateRecords/{{id}}" role="button" class="btn btn-secondary btn-sm">
+                                <i class="fas fa-pencil-alt"></i> Update
+                            </a>
+
+                            <a href="/records/delete/{{id}}" role="button" data-toggle="confirmation"
+                                data-title="Confirm delete?" class="btn btn-danger btn-sm">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- <div class="accordion" id="recordsAccordion">
+                <div class="card-header" id="headingOne">
+                    <button id="recordsCollapse" class="btn btn-link" type="button" data-toggle="collapse"
+                        data-target="#collapseOne{{id}}" aria-expanded="false" aria-controls="collapseOne">
+                        Records <i class="fas fa-chevron-down"></i>
+                    </button>
+
                 </div>
 
-                <div class="accordion" id="recordsAccordion">
-					<div class="card-header" id="headingOne">
-						<button id="recordsCollapse" class="btn btn-link" type="button" data-toggle="collapse"
-								data-target="#collapseOne{{id}}"
-								aria-expanded="false" aria-controls="collapseOne">
-							Records <i class="fas fa-chevron-down"></i>
-						</button>
-
-					</div>
-
-					<div id="collapseOne{{id}}" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
-						<div class="card-body">
-                            <p class="font-italic">Medical Records:</p>
-                            <p class="text-primary font-weight-bold">{{records}}</p>
-                            <br>
-                            <p class="font-italic">Important Information:</p>
-                            <p class="text-primary font-weight-bold">{{information}}</p>
-                        </div>
-					</div>
-				</div>
-            </div>
+                <div id="collapseOne{{id}}" class="collapse" aria-labelledby="headingOne"
+                    data-parent="#recordsAccordion">
+                    <div class="card-body">
+                        <p class="font-italic">Medical Records:</p>
+                        <p class="text-primary font-weight-bold">{{records}}</p>
+                        <br>
+                        <p class="font-italic">Important Information:</p>
+                        <p class="text-primary font-weight-bold">{{information}}</p>
+                    </div>
+                </div>
+            </div> --}}
+        </div>
         {{/each}}
     </div>
 </div>
 
 {{else}}
-    <h3 class="text-dark font-weight-bold">No medical records recorded yet</h3>
+<h3 class="text-dark font-weight-bold">No medical records recorded yet</h3>
 {{/if}}

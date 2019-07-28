@@ -16,7 +16,7 @@
         </div> --}}
 
         <div class="card-body">
-            <h1 class="font-weight-bold text-dark">Add Medical Records</h1>
+            <h1 class="font-weight-bold text-dark">Update Medical Records</h1>
         </div>
 
         <div class="card card-body">
@@ -25,96 +25,71 @@
                     <fieldset class="col-sm-12 col-md-12 col-lg-12">
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
-                                <legend class="font-weight-bold"><i class="fas fa-user"></i> Patient's Particulars
+                                <legend class="font-weight-bold"><i class="fas fa-user"></i> Currently updating
+                                    {{user.name}}'s Medical Records
                                 </legend>
                             </div>
                         </div>
 
-                        {{#if users}}
-                        <div class="card">
-                            <div class="row">
-                                {{#each users}}
-                                <div class="card col-sm-6 col-md-6 col-lg-6">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <p class="card-text col-sm-12 col-md-12 col-lg-12">Name: <span
-                                                    class="font-weight-bold text-primary">{{name}}</span></p>
+                        {{#if user}}
+                        {{!-- {{#each users}} --}}
+                        <div class="card col-sm-12 col-md-12 col-lg-12">
+                            <div class="card-header col-sm-12 col-md-12 col-lg-12">
+                                <h3 class="font-weight-bold">Patient ID/NRIC: <span class="font-italic">{{user.patientID}}</span></h3>
+                            </div>
 
-                                            <p class="card-text col-sm-12 col-md-12 col-lg-12">Patient ID/NRIC:
-                                                <span class="font-weight-bold text-primary">{{patientID}}</span>
-                                            </p>
+                            <div class="card-body col-sm-12 col-md-12 col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Name: <p
+                                                class="font-weight-bold text-primary">{{user.name}}</p></p>
+                                    </div>
 
-                                            <p class="card-text col-sm-12 col-md-12 col-lg-12">Blood type: <span 
-                                                class="font-weight-bold text-primary">{{bloodtype}}</span>
-                                            </p>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Gender: <p
+                                                class="font-weight-bold text-primary">{{user.gender}}</p></p>
+                                    </div>
 
-                                            {{!-- <p class="card-text col-sm-12 col-md-6 col-lg-12">House phone no: <span 
-                                                class="font-weight-bold text-primary">{{housephoneNo}}</span>
-                                            </p> --}}
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Age: <p class="font-weight-bold text-primary">{{user.age}}</p></p>
+                                    </div>
 
-                                            <p class="card-text col-sm-12 col-md-12 col-lg-12">Drug allergy: <span 
-                                                class="font-weight-bold text-primary">{{replaceCommas drugallergy}}</span>
-                                            </p>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Height(m): <p class="font-weight-bold text-primary">{{user.height}}</p></p>
+                                    </div>
 
-                                            <p class="card-text col-sm-12 col-md-12 col-lg-12">Major illness: <span 
-                                                class="font-weight-bold text-primary">{{replaceCommas majorillness}}</span>
-                                            </p>
-                                        </div>
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Weight(kg): <p class="font-weight-bold text-primary">{{user.weight}}</p></p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Date of birth: <p class="font-weight-bold text-primary">{{formatDate user.dateofbirth 'DD MMM YYYY'}}</p></p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Blood type: <p class="font-weight-bold text-primary">{{user.bloodtype}}</p></p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Mobile phone no: <p class="font-weight-bold text-primary">{{user.mobileNo}}</p></p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">House phone no: <p class="font-weight-bold text-primary">{{user.housephoneNo}}</p></p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Drug allergy: <p class="font-weight-bold text-primary">{{replaceCommas user.drugallergy}}</p></p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-3">
+                                        <p class="card-text">Major illness: <p class="font-weight-bold text-primary">{{replaceCommas user.majorillness}}</p></p>
                                     </div>
                                 </div>
-                                {{/each}}
                             </div>
                         </div>
+                        {{!-- {{/each}} --}}
                         {{/if}}
-
-                        <br>
-
-                        <div class="row">
-                            <div class="col-sm-6 col-md-6 col-lg-6">
-                                <button id="openModal" class="btn btn-sm btn-info">Show Consultation Records</button>
-                            </div>
-
-                            <div id="consultationModal" class="modal">
-                                <div class="modal-content">
-                                    <span class="close">&times;</span>
-                                    {{#if consultations}}
-                                    <div class="card-body">
-                                        <div class="card-body">
-                                            <h1 class="font-weight-bold text-dark">All Patient's Consultaion Records</h1>
-                                        </div>
-
-                                        <div class="row">
-                                            {{#each consultations}}
-                                            <div class="border border-info col-sm-12 col-md-12 col-lg-12" style="margin-bottom:15px;">
-                                                <div class="row">
-                                                    <div class="col-sm-12 col-md-4 col-lg-4">
-                                                        <p class="font-italic">Patient name:</p>
-                                                        <p class="font-weight-bold text-primary">{{patientName}}</p>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-md-5 col-lg-3">
-                                                        <p class="font-italic">Patient ID no:</p>
-                                                        <p class="font-weight-bold text-primary">{{patientID}}</p>
-                                                    </div>
-
-                                                    <div class="col-sm-12 col-md-6 col-lg-5">
-                                                        <p class="font-italic">Consultation details:</p>
-                                                        <p class="font-weight-bold text-primary">{{replaceCommas consultation}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {{/each}}
-                                        </div>
-                                    </div>
-                                    {{else}}
-                                    <div class="card-body">
-                                        <h3 class="font-weight-bold text-dark">No consultation records have been recorded</h3>
-                                    </div>
-                                    {{/if}}
-                                </div>
-                            </div>
-                        </div>
-
 
                         {{!-- <div class="card-body">
                             
@@ -250,7 +225,8 @@
 
         <div class="card card-body">
             <div class="row">
-                <form action="" method="post" id="enterRecords">
+                <form action="/records/saveUpdatedRecords/{{record.id}}?_method=PUT" method="post" id="enterRecords">
+                    <input type="hidden" name="_method" value="PUT" />
                     <fieldset>
                         <div class="row">
                             <div class="col-sm-12 col-md-12 col-lg-12">
@@ -287,11 +263,14 @@
                                         value="{{user.patientID}}" readonly /> --}}
 
                                     <div class="form-group">
-                                        <select class="form-control" name="patientID" required>
+                                        {{!-- <select class="form-control" name="patientID" required>
                                             {{#each users}}
                                                 <option value="{{patientID}}">{{patientID}}</option>
                                             {{/each}}
-                                        </select>
+                                        </select> --}}
+
+                                        <input type="text" class="form-control" value="{{record.patientID}}"
+                                            name="patientID" readonly />
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +284,7 @@
                                                 class="fas fa-book-medical"></i> Medical Record(Required):</label>
                                         <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="medicalrecords"
                                             name="medicalrecords" rows="8" cols="160" placeholder="Eg. "
-                                            required></textarea>
+                                            required>{{record.records}}</textarea>
                                     </div>
 
                                     <p class="font-weight-bold text-danger" id="recordsErr" style="display:none">Please
@@ -315,7 +294,8 @@
                                         <label id="title" class="font-weight-bold" for="information"><i
                                                 class="fa fa-info-circle"></i> Other information(Optional):</label>
                                         <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="information"
-                                            name="information" rows="7" cols="160" placeholder="Eg."></textarea>
+                                            name="information" rows="7" cols="160"
+                                            placeholder="Eg.">{{record.information}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -335,30 +315,9 @@
                         </div>
                     </fieldset>
                     <br>
-                    <button type="submit" id="butSaveRecord" class="btn btn-primary"
-                        action="/records/listRecords">Save</button>
+                    <button type="submit" id="butSaveRecord" class="btn btn-primary">Save</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    var modal = document.getElementById("consultationModal");
-    var butOpenModal = document.getElementById("openModal");
-    var closeModal = document.getElementsByClassName("close")[0];
-
-    butOpenModal.onclick = function() {
-        modal.style.display = "block";
-    }
-
-    closeModal.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-</script>
