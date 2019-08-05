@@ -123,14 +123,14 @@ html, body {
     background-color: #1e6468;
 }
 
-#profilephoto {
+#profileImage {
     width: 50px;
     height: 45px;
     border-radius: 5px;
     padding: 3px;
 }
 
-#profilephoto:hover {
+#profileImage:hover {
     background-color: #133e40;
 }
 

@@ -1,0 +1,81 @@
+<style>
+    #wrapper {
+        display: inline;
+        bottom: 0;
+        /* position: absolute; */
+    }
+
+    .categoryForm {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+</style>
+
+<div class="card card-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h1 class="text-dark font-weight-bold">Consultation Records History</h1>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div id="wrapper" class="col-sm-12 col-md-12 col-lg-12">
+                <div class="categoryForm">
+                    <label class="text-dark font-italic">Patient name:</label>
+                    <input id="patientname" type="text" class="form-control" autocomplete="off"
+                        placeholder="Enter patient name *" required />
+                    <button class="btn btn-info" id="searchbtn" onclick="findHistory()"><i
+                            class="fa fa-search"></i></button>
+                </div>
+
+                {{!-- <div class="categoryForm">
+                    <label class="font-italic">Sort by:</label>
+                    <select class="form-control" id="filter">
+                        <option disabled selected style="display:none">--- Select one choice ---</option>
+                        <option value="latestfirst">Consultation Date(latest first)</option>
+                        <option value="earliestfirst">Consultation Date(earliest first)</option>
+                    </select>
+                </div> --}}
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            {{#if consulthistory}}
+            <div class="card border border-primary col-sm-12 col-md-12 col-lg-12">
+                {{#each consulthistory}}
+                <div class="row consultcards" style="border-bottom:1px solid black;">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <p class="font-italic font-weight-bold text-dark">Patient name:
+                            <span class="font-weight-bold text-info patientnames"
+                                data-name="{{patientName}}">{{patientName}}</span>
+                        </p>
+                    </div>
+
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <label class="font-italic text-dark">Consultation date:</label>
+                        <p class="font-weight-bold text-primary">{{formatDate consultationDate 'DD MMM YYYY'}}</p>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <label class="font-italic text-dark">Consultation details/reason:</label>
+                        <p class="font-weight-bold text-primary">{{replaceCommas consultation}}</p>
+                    </div>
+                </div>
+                {{/each}}
+            {{/if}}
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <a href="/records/addRecords" role="button" class="btn btn-secondary">Back to enter Records page</a>
+        </div>
+    </div>
+</div>

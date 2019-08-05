@@ -94,3 +94,15 @@ fieldset {
     text-decoration: none;
     cursor: pointer;
 }
+
+#wrapper {
+    display: inline;
+    bottom: 0;
+    /* position: absolute; */
+}
+
+.categoryForm {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}

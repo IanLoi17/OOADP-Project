@@ -4,13 +4,11 @@ const router = express.Router();
 // Home page
 router.get('/', (req, res) => {
     const title = 'Welcome to Selfcare';
-    res.render('index', {title: title});
+    res.render('index', {
+        title: title
+    });
 });
 
-// About page
-router.get('/about', (req, res) => {
-    res.render('about');
-});
 
 
 // Logout user

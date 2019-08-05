@@ -1,12 +1,15 @@
 <link rel="stylesheet" type="text/css" href="/css/listRecords.css">
-<div class="container">
+<div class="card card-body">
     {{#if records}}
-    <div class="card card-body">
+    <div class="card-body">
         <h3 class="text-dark font-weight-bold">Medical Records List</h3>
         {{#each records}}
         <div class="card-border border border-primary mb-2 w-100 mx-auto" style="border-radius:5px;">
             <div class="card-header col-sm-12 col-md-12 col-lg-12">
-                <h3 class="font-weight-bold">Patient ID/NRIC: <span class="text-info font-italic">{{patientID}}</span>
+                <h3 class="font-weight-bold" style="display:inline-block;">Patient ID/NRIC: <span class="text-info font-italic">{{patientID}}</span>
+                </h3>
+
+                <h3 class="font-weight-bold" style="display:inline-block; margin-left:30px;">Patient name: <span class="text-info font-italic">{{patientName}}</span>
                 </h3>
             </div>
 
@@ -65,7 +68,7 @@
                                 <i class="fas fa-pencil-alt"></i> Update
                             </a>
 
-                            <a href="/records/delete/{{id}}" role="button" data-toggle="confirmation"
+                            <a href="/records/deleteRecords/{{id}}" role="button" data-toggle="confirmation"
                                 data-title="Confirm delete?" class="btn btn-danger btn-sm">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </a>
@@ -100,5 +103,11 @@
 </div>
 
 {{else}}
-<h3 class="text-dark font-weight-bold">No medical records recorded yet</h3>
+<div class="card card-body">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <h3 class="text-danger font-weight-bold">No medical records recorded yet</h3>
+        </div>
+    </div>
+</div>
 {{/if}}

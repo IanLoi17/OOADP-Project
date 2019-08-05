@@ -1,0 +1,183 @@
+{{!-- <head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+ --}}
+
+<div class="card card-body bootstrap snippet">
+    {{!-- <form class="form" method="post" action="/user/save/:id ?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT"> --}}
+    <div class="row">
+        <div class="col-sm-10">
+            <h1 class="font-weight-bold text-dark">Edit profile</h1>
+        </div>
+    </div>
+    <div class="row">
+        {{!-- <div class="col-sm-3"><!--left col--> --}}
+
+
+
+
+
+
+        {{!-- </div><!--/col-3--> --}}
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <form class="form" method="post">
+
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <hr>
+
+                        {{!-- <form action="/video/saveEditedVideo/{{video.id}}?_method=PUT" method="post">
+                        <input type="hidden" name="_method" value="PUT">     --}}
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="first_name">
+                                    <h4 class="font-italic text-dark">Full Name:</h4>
+                                </label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Full Name"
+                                    title="enter your first name if any." value="{{user.name}}" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sx-6">
+                                <label for="email">
+                                    <h4 class="font-italic text-dark">Email:</h4>
+                                </label>
+
+                                <input type="text" class="form-control" name="email" id="email" placeholder="Email" value="{{user.email}}" required />
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sx-6">
+                                <label for="age">
+                                    <h4 class="font-italic text-dark">Age:</h4>
+                                </label>
+
+                                <input type="number" class="form-control" name="age" id="age" placeholder="Age" value="{{user.age}}" required />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="weight">
+                                    <h4 class="font-italic text-dark">Weight(kg):</h4>
+                                </label>
+                                <input type="text" class="form-control" name="weight" id="weight" placeholder="Weight" required
+                                    value="{{user.weight}}">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="height">
+                                    <h4 class="font-italic text-dark">Height(m):</h4>
+                                </label>
+                                <input type="text" class="form-control" name="height" id="height" placeholder="Height" required
+                                    value="{{user.height}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="mobile">
+                                    <h4 class="font-italic text-dark">Mobile Phone No:</h4>
+                                </label>
+                                <input type="number" class="form-control" name="mobileNo" id="mobile" placeholder="Mobile" required
+                                    value="{{user.mobileNo}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="homeNo">
+                                    <h4 class="font-italic text-dark">Home Phone No:</h4>
+                                </label>
+                                <input type="number" class="form-control" id="homeNo" placeholder="Home" required
+                                    title="enter a location" value="{{user.housephoneNo}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="drugallergy">
+                                    <h4 class="font-italic text-dark">Drug allergy:</h4>
+                                </label>
+
+                                <textarea class="form-control" id="drugallergy" name="drugallergy" rows="12" placeholder="Drug allergy" required>{{user.drugallergy}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="majorillness">
+                                    <h4 class="font-italic text-dark">Major illness:</h4>
+                                </label>
+
+                                <textarea class="form-control" id="majorillness" name="majorillness" rows="12" placeholder="Major illness" required>{{user.majorillness}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="password">
+                                <h4 class="font-italic text-dark">Old Password:</h4>
+                            </label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                placeholder="Enter your old password" title="enter your password.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="newPassword">
+                                <h4 class="font-italic text-dark">New Password:</h4>
+                            </label>
+                            <input type="password" class="form-control" name="newPassword" id="newPassword"
+                                placeholder="Enter your new password" title="enter your new password.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-xs-6">
+                            <label for="password">
+                                <h4 class="font-italic text-dark">Confirm Password:</h4>
+                            </label>
+                            <input type="password" class="form-control" name="newPassword2" id="newPassword2"
+                                placeholder="Re-enter your newpassword" title="re-enter your new password.">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-6">
+
+                            <button class="btn btn-md btn-success" type="submit" action="/user/edit/{{user.id}}">
+                                <i class="glyphicon glyphicon-ok-sign" value="Save"></i> Save</button>
+
+                            <a href="/user/profile" class="btn btn-secondary" role="button">Back to profile page</a>
+                        </div>
+                    </div>
+
+            </form>
+
+
+        </div>
+        <!--/tab-pane-->
+
+        {{!--                
+        </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+
+        </div><!--/col-9--> --}}
+        {{!-- </div><!--/row--> --}}

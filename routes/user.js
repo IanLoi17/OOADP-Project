@@ -308,8 +308,8 @@ router.post('/register', (req, res) => {
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
-        successRedirect: '/records/consultationDetail',     // Route to /records/consultationDetail URL
-        failureRedirect: '/displaylogin',                   // Route to /login URL
+        successRedirect: '/',                   // Route to / URL
+        failureRedirect: '/displaylogin',       // Route to /login URL
         failureFlash: true
 
         /* Setting the failureFlash option to true instructs Passport to flash an error
@@ -317,6 +317,138 @@ router.post('/login', (req, res, next) => {
         When a failure occur passport passes the message object as error 
         */
     })(req, res, next);
+});
+
+router.get('/profile', (req, res, next) => {
+    User.findOne({ where: { id: req.user.id } })
+        .then(user => {
+            if (user) {
+                console.log(user)
+                res.render('user/profile', { user });
+            }
+
+        });
+
+});
+//Show edit profile page
+router.get('/edit/:id', (req, res) => {
+    User.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(user => {
+        res.render('user/editprofile', { 
+            user
+        });
+    }).catch(err => console.log(err));
+});
+
+
+//Save edited profile            
+router.post('/edit/:id', (req, res) => {
+    let errors = [];
+
+    let name = req.body.name;
+    let age = req.body.age;
+    let drugallergy = req.body.drugallergy;
+    let majorillness = req.body.majorillness;
+    let email = req.body.email;
+    let weight = req.body.weight;
+    let height = req.body.height;
+    let mobileNo = req.body.mobileNo;
+    let housephoneNo = req.body.houseNo;
+    let password = req.body.password;
+    let newPassword = req.body.newPassword;
+    let profileImageURL = req.body.profileImageURL
+    //let newPassword2 = req.body.newPassword2;
+
+    if (req.body.newPassword.length == "" && req.body.newPassword2 == "") {
+        console.log("************************************IN");
+        User.update({
+            name,
+            email,
+            age,
+            weight,
+            height,
+            mobileNo,
+            housephoneNo,
+            drugallergy,
+            majorillness,
+            profileImageURL
+        }, {
+                where: {
+                    id: req.params.id
+                }
+            }).then(() => {
+                res.redirect('/user/profile');
+            }).catch(err => console.log(err));
+    } else {
+        if (req.body.newPassword !== req.body.newPassword2) {
+            errors.push({ text: 'New Passwords do not match!' });
+        }
+        else if (req.body.newPassword.length < 8 || req.body.newPassword2.length < 8) {
+            errors.push({ text: 'Password must be at least 8 characters!' });
+        }
+        else {
+            if (req.body.newPassword == req.body.newPassword2) {
+                User.findOne({
+                    where: {
+                        email: email
+                    }
+                }).then(user => {
+                    if (user) {
+                        bcrypt.compare(password, user.password, (err, isMatch) => {
+                            if (isMatch) {
+                                bcrypt.genSalt(10, (err, salt) => {
+                                    bcrypt.hash(newPassword, salt, (err, hash) => {
+                                        if (err) throw err;
+                                        password = hash;
+                                        // Create new user record
+                                        User.update({
+                                            name,
+                                            email,
+                                            age,
+                                            weight,
+                                            height,
+                                            mobileNo,
+                                            housephoneNo,
+                                            password,
+                                            drugallergy,
+                                            majorillness,
+                                            profileImageURL
+                                        }, {
+                                                where: {
+                                                    id: req.params.id
+                                                }
+                                            }).then(() => {
+                                                res.redirect('/user/profile');
+                                            }).catch(err => console.log(err));
+                                    })
+                                });
+                                
+                            }
+                        })
+                    }
+                })
+            }
+        }
+        if (errors.length > 0) {
+            res.render('user/editprofile', {
+                errors,
+                name,
+                age,
+                email,
+                weight,
+                height,
+                mobileNo,
+                housephoneNo,
+                drugallergy,
+                majorillness,
+                profileImageURL
+            })
+        }
+
+    }
 });
 
 module.exports = router;

@@ -1,0 +1,31 @@
+<link rel="stylesheet" type="text/css" href="/css/updateFeed.css">
+
+<div class="card card-body">
+    <div>
+        <h1 class="text-dark font-weight-bold">Update Feed {{updates.1.id}}</h1>
+        {{#each updates}}
+        <div id="{{patientID}}">
+            <div class="card card-body" id="updateCards">
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                    <p class="font-italic"></p>
+                    <a href="./edit/{{id}}" class="card-link">
+                        <i class="fas fa-pencil-alt"></i>
+                        Edit
+                    </a>
+                    <a href="./delete/{{id}}" class="card-link" data-toggle="confirmation" data-title="Confirm delete?">
+                        <i class="far fa-trash-alt"></i>
+                        Delete
+                    </a>
+                </div>
+                <h3>Enquiry update for {{patientName}}</h3>
+                <h4>{{updateTopic}}</h4>
+                <p class="font-weight-bold" float="right">Date of enquiry: {{formatDate dateOfUpdate 'DD MMM YYYY'}}</p>
+                <p class="font-weight-bold">Enquiry details: {{updateContent}}</p>
+            </div>
+        </div>
+        {{else}}
+        <br>
+        <h3 class="font-weight-bold text-danger">No updates available</h3>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,77 @@
+<link rel="stylesheet" type="text/css" href="/css/displayRecords.css">
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $('#datepicker').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    });
+</script>
+
+<div class="card card-body">
+    <div>
+        <h1 class="text-dark font-weight-bold">Patient Treatment Update Form (Doctors only)</h1>
+        <p class="text-dark">For doctor to answer patient enquiries after consultations.</p>
+        <form action="./showupdateForm" method="post">
+            <div class="form-group">
+                <label for="patientID"> Patient ID:</label>
+                <select class="form-control" name="patientID" id="patientID">
+                    {{#each enquiry}}
+                    <option value="{{patientID}}">{{patientID}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="patientName"> Patient name:</label>
+                <select class="form-control" name="patientName" id="patientName">
+                    {{#each enquiry}}
+                    <option value="{{patientName}}">{{patientName}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="updateTitle"> Enquiry:</label>
+                <select class="form-control" name="updateTitle" id="updateTitle">
+                    {{#each enquiry}}
+                    <option value="{{enquiryContent}}">{{enquiryContent}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="card card-body">
+                <h3 id="nameDisplay">Patient Name: {{name}}</h3>
+                <p id="patientDetails"></p>
+                {{!-- <input type='date' name='treatmentDate' id="treatmentDate"> --}}
+
+                <div class="form-group">
+                    <label for="">Patient's Enquiry</label>
+                    <textarea class="form-control" name="patientEnquiry" id="patientEnquiry" value="" row="10"
+                        readonly>{{enquiryContent}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Consultation date</label>
+                    <input type="text" id="datepicker" class="form-control" name="treatmentDate"
+                        value="{{formatDate dateofbirth 'DD/MM/YYYY'}}" required />
+                </div>
+                <div class="form-group">
+                    <label for="updateContent">Update Details</label>
+                    <textarea class="form-control" name="updateContent" value="" row="10" autofocus required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+    function changeName() {
+        var temp = document.getElementById("patientName").value;
+        document.getElementById("nameDisplay").innerHTML = "Patient Name: " + temp;
+        var temp2 = document.getElementById("updateTitle").value;
+        document.getElementById("patientEnquiry").innerHTML = temp2;
+        console.log(temp);
+    };
+    $("select").change(
+        changeName()
+    );
+</script>

@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="card card-body">
+        <h3>Edit Update</h3>
+        <form action="/update/saveEditedUpdate/{{update.id}}?_method=PUT" method="post">
+            <input type="hidden" name="_method" value="PUT">
+
+            <div class="container">
+                <div>
+                    <div class="form-group">
+                        <label for="patientID"> Patient ID:</label>
+                        <select class="form-control" name="patientID" id="patientID">
+                            
+                            <option value="{{update.patientID}}">{{update.patientID}}</option>
+                            
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientName"> Patient name:</label>
+                        <select class="form-control" name="patientName" id="patientName">
+                            
+                            <option value="{{update.patientName}}">{{update.patientName}}</option>
+                            
+                        </select>
+                    </div>
+
+                    <div class="card card-body">
+                        <h3>Patient Name: {{name}}</h3>
+                        <p id="patientDetails"></p>
+                        {{!-- <input type='date' name='treatmentDate' id="treatmentDate"> --}}
+
+                        <div class="form-group">
+                            <input type="text" id="datepicker" class="form-control" name="dateofbirth"
+                                value="{{formatDate dateofbirth 'DD/MM/YYYY'}}" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="updateTitle">Patient Enquiry</label>
+                            <textarea class="form-control" name="updateTitle" value="" row="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateContent">Update Details</label>
+                            <textarea class="form-control" name="updateContent" value="" row="10" autofocus
+                                required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+            <input id="butEditVideo" class="btn btn-outline-primary" type="submit" value="Save">
+        </form>
+    </div>
+</div>
+
+<script>
+    $('#datepicker').datepicker({
+        format: 'dd/mm/yyyy',
+        uiLibrary: 'bootstrap4',
+    });
+</script>

@@ -1,0 +1,24 @@
+<!--.col-	.col-sm-	.col-md-	.col-lg-	.col-xl- -->
+<div class="container">
+	<div class="card card-body mx-auto">
+		<h1 class="text-dark font-weight-bold">Add Glossary</h3>
+		<form action="/glossary/addGlossary" method="post" id="addGlossary">
+			<div class="row mb-2">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label class="font-italic" for="term">Terms:</label>
+						<input id="term" type="text" class="form-control" name="term" required>
+					</div>
+
+					<div class="form-group">
+						<label class="font-italic" for="definition">Definitions:</label>
+						<textarea class="form-control" id="definition" name="definition" rows="6"></textarea>
+					</div>
+				</div>
+			</div>
+
+			<button type="submit" disabled style="display: none" aria-hidden="true"></button>
+			<input id="butAddGlossary" class="btn btn-outline-primary" type="submit" value="Save">
+		</form>
+	</div>
+</div>

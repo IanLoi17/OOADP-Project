@@ -1,4 +1,4 @@
-<div class="container">
+{{!-- <div class="container">
     <div class="card card-body">
         <h3 class="text-dark font-weight-bold">Your Profile</h3>
 
@@ -25,4 +25,171 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+{{!-- <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head> --}}
+
+
+<div class="card card-body bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <h1 class="text-dark font-weight-bold">Your Profile</h1>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-12 col-md-12 col-lg-12">
+
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="first_name">
+                                <h4>Full Name:</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{user.name}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="age">
+                                <h4>Age:</h4>
+                            </label>
+
+                            <p class="text-info font-weight-bold">
+                                {{user.age}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="email">
+                                <h4>Email:</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{user.email}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="bloodtype">
+                                <h4>Blood type:</h4>
+                            </label>
+
+                            <p class="text-info font-weight-bold">
+                                {{user.bloodtype}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="weight">
+                                <h4>Weight(kg):</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{user.weight}}
+                            </p>
+                        </div>
+                        
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="height">
+                                <h4>Height(m):</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{user.height}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="gender">
+                                <h4>Gender:</h4>
+                            </label>
+
+                            <p class='text-info font-weight-bold'>
+                                {{user.gender}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="dateofbirth">
+                                <h4>Date of birth:</h4>
+                            </label>
+
+                            <p class="text-info font-weight-bold">
+                                {{formatDate user.dateofbirth 'DD MMM YYYY'}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="mobile font-weight-bold">
+                                <h4>Mobile Phone No:</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{user.mobileNo}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="homeNo font-weight-bold">
+                                <h4>Home Phone No:</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{user.housephoneNo}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="homeNo font-weight-bold">
+                                <h4>Drug allergy:</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{replaceCommas user.drugallergy}}
+                            </p>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <label for="homeNo font-weight-bold">
+                                <h4>Major illness:</h4>
+                            </label>
+                            <p class="text-info font-weight-bold">
+                                {{replaceCommas user.majorillness}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+
+                        <a class="btn btn-md btn-success" href="/user/edit/{{user.id}}"><i
+                                class="fa fa-pencil"></i> Edit</a>
+                    </div>
+                </div>
+                {{!-- </form> --}}
+
+
+
+            </div>
+            <!--/tab-pane-->
+
+
+        </div>
+        <!--/tab-pane-->
+    </div>
+    <!--/tab-content-->
+
 </div>
+<!--/col-9-->
+</div>
+<!--/row-->

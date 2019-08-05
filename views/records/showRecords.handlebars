@@ -1,11 +1,11 @@
 <link rel="stylesheet" type="text/css" href="/css/displayRecords.css">
-<div class="container col-sm-12 col-md-12 col-lg-12">
-    <div>
+<div class="card card-body">
+    <div class="col-sm-12 col-md-12 col-lg-12">
         <div class="card-body">
             <h1 class="font-weight-bold text-dark">Personal Medical Records</h1>
         </div>
 
-        <div class="card card-body">
+        <div class="card-body">
             <div class="row">
                 {{!-- <div class="col-sm-2 col-md-2 col-lg-2" style="margin-bottom:14px;">
                     <img id="profilepic" src="/image/profilephoto.png">
@@ -92,10 +92,115 @@
                     </fieldset>
                 </div>
             </div>
-            <br>
+
             <br>
 
-            <div class="accordion" id="recordsAccordion">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="btn-group">
+                        <button id="showMedicRecords" class="btn btn-md btn-info">Show Medical Records</button>
+                        <button id="showConsultRecords" class="btn btn-md btn-info">Show Consultation Records</button>
+                    </div>
+
+                    <div id="medicalModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div class="card-body">
+                                <h1 class="font-weight-bold text-dark">Personal Medical Records</h1>
+                            </div>
+                            {{#if record}}
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-8 col-lg-8">
+                                        <label class="font-italic text-dark">Medicine prescribed for your consultation: </label>
+                                        <p class="font-weight-bold text-info">{{replaceCommas record.records}}</p>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <label class="font-italic text-dark">Other information(s):</label>
+                                        <p class="font-weight-bold text-info">{{replaceCommas record.information}}</p>
+                                    </div>
+
+                                    {{!-- <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <label class="font-italic text-dark">Consultation Date:</label>
+                                        <p class="font-weight-bold text-info">{{formatDate consult.consultationDate 'DD MMM YYYY'}}</p>
+                                    </div> --}}
+                                </div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <p class="text-dark font-italic" style="font-family:'Source Sans Pro', sans-serif;">Updated on: <span class="font-weight-bold">{{formatDate records.dateposted 'DD MMMM YYYY'}}</span></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{else}}
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <h3 class="font-weight-bold text-danger">You have no Medical Records yet!</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+
+                    <div id="consultationModal" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <div class="card-body">
+                                <h1 class="font-weight-bold text-dark">Personal Consultation Records</h1>
+                            </div>
+                            {{#if consult}}
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                        <label class="font-italic text-dark">Name:</label>
+                                        <p class="text-info font-weight-bold">{{consult.patientName}}</p>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                        <label class="font-italic text-dark">Patient ID no:</label>
+                                        <p class="text-info font-weight-bold">{{consult.patientID}}</p>
+                                    </div>
+
+                                    <div class="col-sm-6 col-md-4 col-lg-4">
+                                        <label class="font-italic text-dark">Date of Consultation:</label>
+                                        <p class="text-info font-weight-bold">{{formatDate consult.consultationDate 'DD MMM YYYY'}}</p>
+                                    </div>
+
+                                    <div class="col-sm-8 col-md-8 col-lg-8">
+                                        <label class="font-italic text-dark">Consultation Reasons/Details:</label>
+                                        <p class="text-info font-weight-bold">{{replaceCommas consult.consultation}}</p>
+                                    </div>
+
+                                    <div class="col-sm-4 col-md-4 col-lg-4">
+                                        <div class="btn-group">
+                                            <a href="/records/updateConsultation/{{consult.id}}" role="button" class="btn btn-sm btn-secondary"><i class="fas fa-pencil-alt"></i> Update</a>
+                                            <a href="/records/deleteConsultation/{{consult.id}}" role="button" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{else}}
+                            <div class="card card-body">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <h3 class="font-weight-bold text-danger">No Consultation Records yet</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- <div class="accordion" id="recordsAccordion">
                 <div class="header" id="headingOne">
                     <button id="recordsCollapse" class="btn btn-link font-weight-bold" type="button"
                         data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
@@ -124,22 +229,45 @@
 
                         <h3 class="font-weight-bold font-italic">Important information(s):</h3>
                         <p class="text-primary font-weight-bold" name="information">{{records.information}}</p> --}}
-                    </div>
+                    {{!--</div>
                 </div>
 
-                {{else}}
+                {{!--{{else}}
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#recordsAccordion">
                     <div class="card-body">
                         <h3 class="font-weight-bold">You have no Medical Records Yet!</h3>
                     </div>
                 </div>
-                {{/if}}
-            </div>
+                {{!--{{/if}}
+            </div> --}}
         </div>
     </div>
 </div>
 <script>
     function home() {
         window.location.replace('/');
+    }
+
+    var medicalModal = document.getElementById("medicalModal");
+    var consultModal = document.getElementById("consultationModal");
+    var medicalbtn = document.getElementById("showMedicRecords");
+    var consultationbtn = document.getElementById("showConsultRecords");
+    var span0 = document.getElementsByClassName("close")[0];
+    var span1 = document.getElementsByClassName("close")[1];
+
+    medicalbtn.onclick = function() {
+        medicalModal.style.display = "block";
+    }
+
+    span0.onclick = function() {
+        medicalModal.style.display = "none";
+    }
+
+    consultationbtn.onclick = function() {
+        consultModal.style.display = "block";
+    }
+
+    span1.onclick = function() {
+        consultModal.style.display = "none";
     }
 </script>

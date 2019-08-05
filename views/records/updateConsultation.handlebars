@@ -1,0 +1,60 @@
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $('#datepicker').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    });
+</script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <h1 class="font-weight-bold text-dark">Update Consultation Details Form</h1>
+        </div>
+
+        <div class="card col-sm-12 col-md-12 col-lg-12">
+            <form action="/records/saveUpdatedConsultation/{{consult.id}}?_method=PUT" method="post">
+            <input type="hidden" name="_method" value="PUT" />
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <label class="font-italic">Name:</label>
+                            <input class="form-control" name="patientName" value="{{user.name}}" type="text" readonly />
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <label class="font-italic">Patient ID no:</label>
+                            <input class="form-control" name="patientID" value="{{user.patientID}}" type="text" readonly />
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <label class="font-italic">Consultation Date:</label>
+                            <input class="form-control" name="consultationDate" type="text" value="{{formatDate consult.consultationDate 'DD/MM/YYYY'}}" id="datepicker" autocomplete="off" />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <label class="font-italic">Consultation reason/details:</label>
+                            <textarea class="form-control" name="consultationDetails" rows="10" required>{{consult.consultation}}</textarea>
+                        </div>
+                    </div>
+
+                    <br>
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg">
+                            <button class="btn btn-sm btn-success" type="submit">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

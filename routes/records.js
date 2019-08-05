@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const alertMessage = require('../helpers/messenger');
 const ensureAuthenticated = require('../helpers/auth');
+const moment = require('moment');
 const Records = require('../models/Records');
 const User = require('../models/User');
-const Consultation = require('../models/Consultation');
+const Consult = require('../models/Consult');
+const ConsultHistory = require('../models/ConsultHistory');
 
 
 // Render medical records list
@@ -17,17 +19,6 @@ router.get('/listRecords', ensureAuthenticated, (req, res) => {
 
             raw: true
         }).then((records) => {
-            // User.findOne({
-            //     where: {
-            //         patientID: 'T0117430J'
-            //     }
-            // }).then((user) => {
-            //     res.render('./records/listRecords', {
-            //         records: records,
-            //         user: user
-            //     });
-            // })
-
             res.render('./records/listRecords', {
                 records: records,
             });
@@ -41,58 +32,196 @@ router.get('/listRecords', ensureAuthenticated, (req, res) => {
 });
 
 
+// Render consultation history handlebars
+router.get('/consultHistory', ensureAuthenticated, (req, res) => {
+    if (req.user.salutation == 'D') {
+        ConsultHistory.findAll({
+            where: {}
+        }).then((consulthistory) => {
+            res.render('./records/consultHistory', {
+                consulthistory,
+            });
+        }).catch(err => console.log(err))
+    }
 
-// Render find patient handlebars
-// router.get('/findPatient', ensureAuthenticated, (req, res) => {
-//     if (req.user.salutation == 'D') {
-//         // User.findAll({
-//         //     where: {
-//         //         salutation: 'P'
-//         //     }
-//         // }).then((user) => {
-//         //     res.render('./records/findPatient', {
-//         //         user: user
-//         //     });
-//         // }).catch(err => console.log(err));
-
-//         // res.redirect('/records/addRecords');
-//         res.render('./records/enterRecords')
-//     }
-
-//     else {
-//         alertMessage(res, 'danger', 'You are not a Doctor you cannot access this link!', 'fas fa-exclamation-circle', true);
-//         res.redirect('/');
-//     }
-// });
+    else {
+        alertMessage(res, 'danger', 'Unauthorized access! Only Doctors can access to the link', 'fas fa-exclamation-circle', true);
+        res.redirect('/');
+    }
+});
 
 
 
-// router.post('/findPatient', (req, res) => {
-//     let patientid = req.body.patientId;
+// Render consultation reason handlebars
+router.get('/enterConsultation', ensureAuthenticated, (req, res) => {
+    User.findOne({
+        where: {
+            patientID: req.user.patientID
+        }
+    }).then((user) => {
+        res.render('./records/enterConsultation', {
+            user: user
+        });
+    }).catch(err => console.log(err))
+});
 
-//     User.findOne({
-//         where: {
-//             patientID: patientid
-//         }
-//     }).then((user) => {
-//         if (user) {
-//             // res.render('./records/enterRecords', {
-//             //     user: user
-//             // });
 
-//             // console.log("here");
 
-//             alertMessage(res, 'success', 'Patient ' + user.name + ' with patient ID "' + patientid + '" has been found!', 'fa fa-check-circle', true);
-//             res.redirect('/records/addRecords');
-//         }
+router.post('/enterConsultation', (req, res) => {
+    let patientName = req.body.patientName;
+    let patientID = req.body.patientID;
+    let consultation = req.body.consultationDetails;
+    let consultationDate = moment(req.body.consultationDate, 'DD/MM/YYYY');
+    let currentDate = moment();
+    let diffDays = consultationDate.diff(currentDate, 'days');
+    console.log(diffDays);
 
-//         else {
-//             alertMessage(res, 'danger', 'There is no patient found with the ID you entered!', 'fas fa-exclamation-circle', true);
-//             res.redirect('/records/findPatient');
-//         }
-//     }).catch(err => console.log(err));
-// });
 
+    Consult.findOne({
+        where: {
+            patientID: req.user.patientID
+        }
+    }).then((consult) => {
+        if (consult) {
+            alertMessage(res, 'danger', 'You can only only enter consultation records once! Please edit or delete your consultation', 'fa fa-info-circle', true);
+            res.redirect('/records/enterConsultation');
+        }
+
+        else {
+            if (diffDays < 0) {
+                alertMessage(res, "danger", "Your consultation date cannot be before today's date!", "fa fa-info-circle", true);
+                res.redirect('/records/enterConsultation');
+            }
+
+            else if (diffDays > 0) {
+                alertMessage(res, "danger", "Your consultation date cannot be after today's date", "fas fa-exclamation-circle", true);
+                res.redirect('/records/enterConsultation');
+            }
+
+            else {
+                Consult.create({
+                    patientName,
+                    patientID,
+                    consultation,
+                    consultationDate,
+                });
+
+                ConsultHistory.create({
+                    patientName,
+                    patientID,
+                    consultation,
+                    consultationDate,
+                });
+    
+                alertMessage(res, 'success', 'Consultation reocrds have been added successfully!', 'fa fa-check-circle', true);
+                res.redirect('/');
+            }
+        }
+    }).catch(err => console.log(err))
+})
+
+
+router.get('/updateConsultation/:id', ensureAuthenticated, (req, res) => {
+    Consult.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then((consult) => {
+        User.findOne({
+            where: {
+                patientID: consult.patientID
+            }
+        }).then((user) => {
+            if (!consult) {
+                alertMessage(res, 'danger', 'There is no such consultation reocrds!', 'fas fa-exclamation-circle', true);
+                res.redirect('/records/showRecords');
+            }
+
+            else {
+                if (req.user.patientID === consult.patientID) {
+                    res.render('./records/updateConsultation', {
+                        consult,
+                        user
+                    });
+                }
+
+                else {
+                    alertMessage(res, 'danger', 'Unauthorized access to Consultation Records!', 'fas fa-exclamation-circle', true);
+                    res.redirect('/');
+                }
+            }
+        }).catch(err => console.log(err))
+    }).catch(err => console.log(err))
+});
+
+
+router.put('/saveUpdatedConsultation/:id', ensureAuthenticated, (req, res) => {
+    let patientName = req.body.patientName;
+    let patientID = req.body.patientID;
+    let consultation = req.body.consultationDetails;
+    let consultationDate = moment(req.body.consultationDate, 'DD/MM/YYYY');
+    let currentDate = moment();
+    let diffDays = consultationDate.diff(currentDate, 'days');
+    console.log(diffDays);
+
+    ConsultHistory.create({
+        patientName,
+        patientID,
+        consultation,
+        consultationDate
+    });
+
+    Consult.update({
+        patientName,
+        patientID,
+        consultation,
+        consultationDate
+    }, {
+        where: {
+            id: req.params.id
+        }
+    }).then(() => {
+        if (diffDays < 0) {
+            alertMessage(res, "danger", "Your consultation date cannot be before today's date!", "fa fa-info-circle", true);
+            res.redirect('/records/updateConsultation/:id');
+        }
+
+        else if (diffDays > 0) {
+            alertMessage(res, "danger", "Your consultation date cannot be before today's date!", "fas fa-exclamation-circle", true);
+            res.redirect('/records/updateConsultation/:id');
+        }
+
+        else {
+            alertMessage(res, 'success', 'Consultation Records have been updated successfully!', 'fa fa-check-circle', true);
+            res.redirect('/');
+        }
+    }).catch(err => console.log(err))
+});
+
+
+
+router.get('/deleteConsultation/:id', ensureAuthenticated, (req, res) => {
+    let patientID = req.user.patientID;
+    let consultationID = req.params.id;
+
+    Consult.findOne({
+        where: {
+            id: consultationID,
+            patientID: patientID
+        }
+    }).then((consult) => {
+        if (consult != null) {
+            Consult.destroy({
+                where: {
+                    id: consultationID
+                }
+            }).then(() => {
+                alertMessage(res, 'danger', 'Consultation Records deleted successfully', 'fas fa-trash-alt', true);
+                res.redirect('/');
+            }).catch(err => console.log(err))
+        }
+    }).catch(err => console.log(err))
+});
 
 
 // Render the add medical records page
@@ -103,13 +232,14 @@ router.get('/addRecords', ensureAuthenticated, (req, res) => {
                 salutation: 'P'
             }
         }).then((users) => {
-            Consultation.findAll({})
-            .then((consultations) => {
+            Consult.findAll({
+                where: {}
+            }).then((consults) => {
                 res.render('./records/enterRecords', {
                     users: users,
-                    consultations: consultations
-                }) 
-            }).catch(err => console.log(err))
+                    consults
+                });
+            })
         }).catch(err => console.log(err));
     }
 
@@ -122,7 +252,7 @@ router.get('/addRecords', ensureAuthenticated, (req, res) => {
 
 
 // Delete medical records for the patient
-router.get('/delete/:id', ensureAuthenticated, (req, res) => {
+router.get('/deleteRecords/:id', ensureAuthenticated, (req, res) => {
     let userId = req.user.id;
     let recordId = req.params.id;
 
@@ -137,7 +267,7 @@ router.get('/delete/:id', ensureAuthenticated, (req, res) => {
                 where: {
                     id: recordId
                 }
-            }).then((record) => {
+            }).then(() => {
                 alertMessage(res, 'danger', 'Medical Record deleted successfully', 'fas fa-trash-alt', true);
                 res.redirect('/records/listRecords');
             }).catch(err => console.log(err));
@@ -145,7 +275,7 @@ router.get('/delete/:id', ensureAuthenticated, (req, res) => {
 
         else {
             alertMessage(res, 'danger', 'Unauthorized access to Medical Record', 'fas fa-exclamation-circle', true);
-            res.redirect('/logout');
+            res.redirect('/records/listRecords');
         }
     })
 });
@@ -160,24 +290,31 @@ router.get('/showRecords', ensureAuthenticated, (req, res) => {
         where: {
             patientID: req.user.patientID
         }
-    }).then((records) => {
-        res.render('./records/showRecords', {
-            records,
-            name,
-            patientID,
-            gender,
-            nric,
-            mobileNo,
-            housephoneNo,
-            age,
-            height,
-            weight,
-            bloodtype,
-            dateofbirth,
-            drugallergy,
-            majorillness
-        });
-    });
+    }).then((record) => {
+        Consult.findOne({
+            where: {
+                patientID: req.user.patientID
+            }
+        }).then((consult) => {
+            res.render('./records/showRecords', {
+                record,
+                consult,
+                name,
+                patientID,
+                gender,
+                nric,
+                mobileNo,
+                housephoneNo,
+                age,
+                height,
+                weight,
+                bloodtype,
+                dateofbirth,
+                drugallergy,
+                majorillness
+            });
+        })
+    }).catch(err => console.log(err))
 });
 
 
@@ -216,53 +353,10 @@ router.get('/updateRecords/:id', ensureAuthenticated, (req, res) => {
 });
 
 
-// Render enter consultation details handlebars
-router.get('/consultationDetail', ensureAuthenticated, (req, res) => {
-    User.findOne({
-        where: {
-            id: req.user.id
-        }
-    }).then((user) => {
-        res.render('./records/consultationDetail', {
-            user: user
-        });
-    }).catch(err => console.log(err));
-});
-
-
-
-router.post('/consultationDetail', (req, res) => {
-    let patientname = req.body.patientName;
-    let patientid = req.body.patientID;
-    let consultationdetail = req.body.consultationDetails;
-
-    Consultation.findOne({
-        where: {
-            patientID: patientid
-        }
-    }).then((consultation) => {
-        if (consultation) {
-            alertMessage(res, 'danger', 'You can only enter your consultation detail once per day', 'fa fa-info-circle', true);
-            res.redirect('/');
-        }
-
-        else {
-            Consultation.create({
-                patientName: patientname,
-                patientID: patientid,
-                consultation: consultationdetail
-            }).then(() => {
-                alertMessage(res, 'success', 'Consultation details has been added successfully', 'fa fa-check-circle', true);
-                res.redirect('/');
-            }).catch(err => console.log(err));
-        }
-    });
-});
-
 
 // Save updated medical records of patient
 router.put('/saveUpdatedRecords/:id', ensureAuthenticated, (req, res) => {
-    let {patientID, medicalrecords, information} = req.body;
+    let {patientID, patientName, medicalrecords, information} = req.body;
     let userId = req.user.id;
     var d = new Date();
     let dateposted = d.toLocaleDateString();
@@ -273,6 +367,7 @@ router.put('/saveUpdatedRecords/:id', ensureAuthenticated, (req, res) => {
             records: medicalrecords,
             information,
             patientID: patientID,
+            patientName,
             userId,
             dateposted: dateposted
         }, {
@@ -290,6 +385,7 @@ router.put('/saveUpdatedRecords/:id', ensureAuthenticated, (req, res) => {
             records: medicalrecords,
             information: information="None",
             patientID: patientID,
+            patientName,
             userId,
             dateposted: dateposted
         }).then(() => {
@@ -302,7 +398,7 @@ router.put('/saveUpdatedRecords/:id', ensureAuthenticated, (req, res) => {
 
 
 router.post('/addRecords', (req, res) => {
-    let { patientID, medicalrecords, information } = req.body;
+    let { patientID, medicalrecords, patientName, information } = req.body;
     let userId = req.user.id;
     var d = new Date();
     let dateposted = d.toLocaleDateString();
@@ -322,6 +418,7 @@ router.post('/addRecords', (req, res) => {
                     records: medicalrecords,
                     information,
                     patientID: patientID,
+                    patientName,
                     userId,
                     dateposted: dateposted
                 }).then(() => {
@@ -347,6 +444,7 @@ router.post('/addRecords', (req, res) => {
                     records: medicalrecords,
                     information: information = 'None',
                     patientID: patientID,
+                    patientName,
                     userId,
                     dateposted: dateposted
                 }).then(() => {

@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/css/addRecords.css">
-<div class="container">
+<div class="card card-body">
     <div>
         {{!-- <div class="card-body">
             <h1 class="font-weight-bold text-dark">Retrieve Patient's Particulars</h1>
@@ -35,7 +35,7 @@
                         {{!-- {{#each users}} --}}
                         <div class="card col-sm-12 col-md-12 col-lg-12">
                             <div class="card-header col-sm-12 col-md-12 col-lg-12">
-                                <h3 class="font-weight-bold">Patient ID/NRIC: <span class="font-italic">{{user.patientID}}</span></h3>
+                                <h3 class="font-weight-bold">Patient ID/NRIC: <span class="font-italic text-info">{{user.patientID}}</span></h3>
                             </div>
 
                             <div class="card-body col-sm-12 col-md-12 col-lg-12">
@@ -91,123 +91,6 @@
                         {{!-- {{/each}} --}}
                         {{/if}}
 
-                        {{!-- <div class="card-body">
-                            
-                            <div class="card col-sm-12 col-md-12 col-lg-12 bg-primary">
-                                <div class="card-body">
-                                    <h4 class="card-title">Patient ID/NRIC: <span
-                                            class="text-dark font-weight-bold">{{patientID}}</span>
-                                    </h4>
-                                    
-                                    <div class="row">
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Name: <span
-                                                class="text-dark font-weight-bold">{{name}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Gender: <span
-                                                class="text-dark font-weight-bold">{{gender}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Age: <span
-                                                class="text-dark font-weight-bold">{{age}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Height(m): <span
-                                                class="text-dark font-weight-bold">{{height}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Weight(kg): <span
-                                                class="text-dark font-weight-bold">{{weight}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Date of birth: <span
-                                                class="text-dark font-weight-bold">{{formatDate dateofbirth 'DD MMMM YYYY'}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Blood type: <span
-                                                class="text-dark font-weight-bold">{{bloodtype}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">Mobile phone no: <span 
-                                            class="text-dark font-weight-bold">{{mobileNo}}</span>
-                                        </p>
-
-                                        <p class="card-content col-sm-12 col-md-6 col-lg-6">House phone no: <span 
-                                            class="text-dark font-weight-bold">{{housephoneNo}}</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-
-                                {{!-- <div class="row">
-                                    <div class="card-body col-sm-12 col-md-12 col-lg-12">
-                                        <h3 class="font-italic">Patient ID/NRIC: <span class="text-dark font-weight-bold">{{user.patientID}}</span></h3>
-                                    </div>
-                                </div>
-
-                                <div class="card card-body border border-primary">
-                                    <div class="row">
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Name:</p>
-                                            <p class="text-info font-weight-bold">{{user.name}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Gender:</p>
-                                            <p class="text-info font-weight-bold">{{user.gender}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Age:</p>
-                                            <p id="age" class="text-info font-weight-bold">{{user.age}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Height(m):</p>
-                                            <p class="text-info font-weight-bold">{{user.height}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Weight(kg):</p>
-                                            <p class="text-info font-weight-bold">{{user.weight}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Date of birth:</p>
-                                            <p class="text-info font-weight-bold">{{formatDate user.dateofbirth 'DD MMMM YYYY'}}
-                                            </p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Blood type:</p>
-                                            <p class="text-info font-weight-bold">{{user.bloodtype}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Mobile phone no:</p>
-                                            <p class="text-info font-weight-bold">{{user.mobileNo}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">House phone no:</p>
-                                            <p class="text-info font-weight-bold">{{user.housephoneNo}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Drug allergy:</p>
-                                            <p class="text-info font-weight-bold">{{replaceCommas user.drugallergy}}</p>
-                                        </div>
-
-                                        <div class="col-sm-4 col-md-4 col-lg-3">
-                                            <p class="font-italic">Major illness:</p>
-                                            <p class="text-info font-weight-bold">{{replaceCommas user.majorillness}}</p>
-                                        </div>
-                                    </div>
-                                </div> 
-                            
-                        </div> --}}
-
-
                         {{!-- <br>
 
                         <div class="row">
@@ -236,39 +119,21 @@
                         </div>
 
                         <div class="card card-body border-primary">
-                            {{!-- <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <label id="title" class="font-weight-bold" for="patientid"><i
-                                                class="fa fa-search"></i> Enter the Patient ID no. you are going to
-                                            enter Medical Records for(Required):</label>
-                                        <input type="text" name="patientid" class="form-control"
-                                            placeholder="Enter patient ID to retrieve the particulars of that patient *"
-                                            required />
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
+                                    <label for="patientid" id="title" class="font-weight-bold"><i
+                                            class="fa fa-user"></i> Patient name:</label>
 
-                                        <div class="valid-feedback"><i class="fa fa-check-circle"></i> Patient ID number
-                                            is valid</div>
-                                        <div class="invalid-feedback"><i class="fas fa-exclamation-circle"></i> Please
-                                            enter a patient ID number
-                                        </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" value="{{record.patientName}}" name="patientName" readonly />
                                     </div>
                                 </div>
-                            </div> --}}
 
-                            <div class="row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-12 col-md-6 col-lg-6">
                                     <label for="patientid" id="title" class="font-weight-bold"><i
                                             class="fa fa-id-card"></i> Patient ID number:</label>
-                                    {{!-- <input type="text" name="patientID" id="patientid" class="form-control"
-                                        value="{{user.patientID}}" readonly /> --}}
 
                                     <div class="form-group">
-                                        {{!-- <select class="form-control" name="patientID" required>
-                                            {{#each users}}
-                                                <option value="{{patientID}}">{{patientID}}</option>
-                                            {{/each}}
-                                        </select> --}}
-
                                         <input type="text" class="form-control" value="{{record.patientID}}"
                                             name="patientID" readonly />
                                     </div>
@@ -281,7 +146,7 @@
                                 <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label id="title" class="font-weight-bold" for="medicalrecords"><i
-                                                class="fas fa-book-medical"></i> Medical Record(Required):</label>
+                                                class="fas fa-book-medical"></i> Medicine prescribed to {{user.name}}(Required):</label>
                                         <textarea class="col-sm-12 col-md-12 col-lg-12 form-control" id="medicalrecords"
                                             name="medicalrecords" rows="8" cols="160" placeholder="Eg. "
                                             required>{{record.records}}</textarea>
@@ -316,6 +181,7 @@
                     </fieldset>
                     <br>
                     <button type="submit" id="butSaveRecord" class="btn btn-primary">Save</button>
+                    <a href="/records/listRecords" role="button" class="btn btn-secondary">Back to list records page</a>
                 </form>
             </div>
         </div>

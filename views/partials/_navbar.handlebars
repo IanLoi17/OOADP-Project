@@ -7,27 +7,27 @@
     <div class="topnav" id='cssmenu'>
         <ul class="col-sm-12 col-md-12 col-lg-12">
             <div class="row">
-                <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="col-sm-1 col-md-1 col-lg-1">
                     <li>
-                        <a class="nav-link font-weight-bold" href="/" style="margin-top:4px;"><i class="fa fa-home"></i> Selfcare</a>
-                    </li>
-
-                    <li class='nav-item'>
-                        <a class="nav-link" href='/about' style="margin-top:4px;"><i class="fa fa-info-circle"></i> About</a>
+                        <a class="nav-link font-weight-bold" href="/" style="margin-top:4px; font-size:19px;">Selfcare</a>
                     </li>
                 </div>
 
-                <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="col-sm-11 col-md-11 col-lg-11">
                     {{#if user}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/records/enterConsultation" style="margin-top:4px;"><i class="fa fa-wpforms"></i> Enter Consultation</a>
+                    </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="/records/showRecords" style="margin-top:4px;"><i class="fa fa-plus-square"></i> Personal Medical Records</a>
                     </li>
 
-                    <li class="nav-item">
+                    {{!-- <li class="nav-item">
                         <a class="nav-link" href="/records/consultationDetail" style="margin-top:4px;"><i class="fa fa-wpforms"></i> Consultation Form</a>
-                    </li>
+                    </li> --}}
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown" id="addlistRecords">
                         <a href="#" class="nav-link dropdown-toggle"
                             style="margin-top:4px; width:208px;" data-toggle="dropdown" id="doctorlink"><i class="fas fa-book-medical"></i> Medical Records
                         </a>
@@ -37,6 +37,33 @@
                             <a class="droptown-item" href="/records/listRecords"><i class="fa fa-list-alt"></i> Medical Records List</a>
                         </div>
                     </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle"
+                            style="margin-top:4px; width:210px;" data-toggle="dropdown" id="consultationlink"><i class="fa fa-medkit"></i> Consultation Details
+                        </a>
+
+                        <div class="dropdown-menu" id="dropdown-menu">
+                            <a class="dropdown-item" href="/update/enquiryForm"><i class="fa fa-wpforms"></i> Online Enquiry Form</a>
+                            <a id="enquiryUpdate" class="dropdown-item" href="/update/showupdateForm"><i class="fa fa-wpforms"></i> Enquiry Update Form</a>
+                            <a class="dropdown-item" href="/update/showupdateFeed"><i class="fa fa-wpforms"></i> Enquiry Update Feed</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown" data-toggle="popover">
+                        <a href="#" class="nav-link dropdown-toggle"
+                            style="margin-top:4px; width:174px;" data-toggle="dropdown"><i class="fas fa-book-medical"></i> Glossary
+                        </a>
+
+                        <div class="dropdown-menu" id="dropdown-menu">
+                            <a class="droptown-item" id="gAdd" href="/glossary/showAddGlossary"><i class="fa fa-plus-circle"></i> Add Term</a>
+                            <a class="droptown-item" id="gList" href="/glossary/glossary"><i class="fa fa-list-alt"></i> Medical Glossary</a>
+                        </div>
+                    </li>
+
+                    <a class="nav-link" href="/user/profile" style="float:right; wdith:30px; margin-right:20px;">
+                        <img src="/image/profileImage.png" id="profileImage" />
+                    </a>
 
                     {{!-- <a class="nav-link" href="/user/profile" style="float:right; wdith:30px; margin-right:20px;">
                         <img src="/image/profilephoto.png" id="profilephoto" />
@@ -51,7 +78,7 @@
                         </a> --}}
                 </div>
 
-                <div class="col-sm-10 col-md-10 col-lg-10">
+                <div class="col-sm-11 col-md-11 col-lg-11">
                     {{else}}
                     <li class="nav-item" style="float:right">
                         <a class="nav-link" href="/displayregister" style="margin-top:4px;"><i class="fa fa-user-plus"></i> Register</a>
@@ -66,3 +93,19 @@
         </ul>
     </div>
 </nav>
+
+<script>
+    userRole = 'Patient';
+
+    if (userRole == '{{user.occupation}}') {  //patient
+        document.getElementById('gAdd').style.display = "none";
+        document.getElementById("addlistRecords").style.display = "none";
+        document.getElementById("enquiryUpdate").style.display = "none";
+    }
+
+    else { //doctor
+        document.getElementById('gAdd').style.display = "block";
+        document.getElementById("addlistRecords").style.display = "block";
+        document.getElementById("enquiryUpdate").style.display = "block";
+    }
+</script>

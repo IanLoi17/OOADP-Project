@@ -21,10 +21,13 @@ const db = require('./config/db');
 const mainRoute = require('./routes/main');
 const userRoute = require('./routes/user');
 const recordsRoute = require('./routes/records');
+const updateRoute = require('./routes/update');
+const glossaryRoute = require('./routes/glossary');
 
 // Bring in handlebars helpers
 const {formatDate} = require('./helpers/hbs');
 const {replaceCommas} = require('./helpers/hbs');
+const {insertLine} = require('./helpers/hbs');
 
 
 // Bring in database connection
@@ -58,7 +61,8 @@ const app = express();
 app.engine('handlebars', exphbs({
 	helpers: {
 		formatDate: formatDate,
-		replaceCommas: replaceCommas
+		replaceCommas: replaceCommas,
+		insertLine: insertLine
 	},
 
 	defaultLayout: 'main' // Specify default template views/layout/main.handlebar 
@@ -139,6 +143,8 @@ app.use(function(req, res, next) {
 app.use('/', mainRoute);
 app.use('/user', userRoute);
 app.use('/records', recordsRoute);
+app.use('/update', updateRoute);
+app.use('/glossary', glossaryRoute);
 
 
 /*

@@ -1,0 +1,75 @@
+<!-- Form for doctors to enter details about patients into.-->
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script>
+    $(function () {
+        $('#datepicker').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+    });
+</script>
+<div class="container">
+    <div class="row">
+        <div class="card card-body">
+            <h1 class="font-weight-bold text-dark">Online-Consultation Form</h1>
+            <p class="text-dark">Instructions: Enter details of patients who come for consultation.</p>
+            <form action="./EnquiryForm" method="post" id="consultation">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <label class="font-italic" for="patientName">Patient Name:</label>
+                            <input class="form-control" type="text" value="{{user.name}}" id="patientName"
+                                name="patientName" readonly />
+                        </div>
+
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <label class="font-italic" for="patientID">Patient ID:</label>
+                            <input class="form-control" type="text" value="{{user.patientID}}" id="patientID"
+                                name="patientID" readonly />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-3 col-md-3 col-lg-3">
+                            <label class="font-italic" for="consultationdate">Enquiry Date:</label>
+                            <input type="text" class="form-control" id="datepicker" name="consultationDate"
+                                value="{{formatDate dateofbirth 'DD/MM/YYYY'}}" readonly disabled />
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <label class="font-italic" for="visitReason">Reason For Enquiry:</label>
+                            <input class="form-control" type="text" id="visitReason" name="visitReason">
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-12">
+                            <label for="enquiryContent">Enquiry Details:</label>
+                            <textarea class="form-control" name="enquiryContent" value="" row="10" required></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                {{!-- <input type='date' name='consultationDate' id="consultationDate"> --}}
+
+                <button class="btn btn-primary" typr="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var currentDate = new Date();
+
+    var date = currentDate.getDate();
+    var month = currentDate.getMonth();
+    var year = currentDate.getFullYear();
+
+    var dateString = date + "/" + (month + 1) + "/" + year;
+    document.getElementById('treatmentDate').innerHTML = dateString;
+</script>
